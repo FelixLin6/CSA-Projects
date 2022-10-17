@@ -11,25 +11,11 @@ public class PongRunner extends GDV5 {
     Ball ball = new Ball(12);
     Paddle pad1 = new Paddle(0, 15, 200);
     Paddle pad2 = new Paddle(PongRunner.getMaxWindowX()-15, 15, 200);
+    KeyboardInput game = new KeyboardInput(pad1, pad2);
 
 
     public PongRunner() {
         super();
-        this.addKeyListener(this);
-    }
-
-    public void keyPressed(KeyEvent e){
-        try {
-            int key = e.getKeyCode();
-        if(key==KeyEvent.VK_W){pad1.up();}
-        else if(key==KeyEvent.VK_S){pad1.down();}
-        else if(key==KeyEvent.VK_UP){pad2.up();}
-        else if(key==KeyEvent.VK_DOWN){pad2.down();}
-            Thread.sleep(12);
-        } 
-        catch(InterruptedException exception) {
-            System.out.println("got interrupted!");
-        }
     }
 
     public static void main(String[] args) {
@@ -39,6 +25,7 @@ public class PongRunner extends GDV5 {
     }
 
     public void update() { //60 frames per second
+        game.updatePads();
     	ball.update(pad1.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius) || pad2.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius));
     }
 
