@@ -13,11 +13,10 @@ public class KeyboardInput {
         this.pad2 = pad2;
     }
 
-    public void updatePads() {
-        int key = e.getKeyCode();
-        if(key==KeyEvent.VK_W){pad1.up() ;}
-        else if(key==KeyEvent.VK_S){pad1.down();}
-        else if(key==KeyEvent.VK_UP){pad2.up();}
-        else if(key==KeyEvent.VK_DOWN){pad2.down();}
+    public void updatePads(boolean[] keys) {
+        if(keys[KeyEvent.VK_W]){pad1.up() ;}
+        else if(keys[KeyEvent.VK_S]){pad1.down();}
+        else if(keys[KeyEvent.VK_UP]){pad2.up();}
+        else if(keys[KeyEvent.VK_DOWN]){pad2.down();}
     }
 }
