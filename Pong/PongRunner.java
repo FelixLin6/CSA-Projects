@@ -25,7 +25,7 @@ public class PongRunner extends GDV5 {
     }
 
     public void update() { //60 frames per second
-        game.updatePads();
+        game.updatePads(PongRunner.KeysPressed);
     	ball.update(pad1.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius) || pad2.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius));
     }
 
