@@ -4,9 +4,9 @@ import java.awt.event.KeyEvent;
 
 public class KeyboardInput {
 
-    Paddle pad1;
-    Paddle pad2;
-    KeyEvent e;
+    private Paddle pad1;
+    private Paddle pad2;
+    private KeyEvent e;
 
     KeyboardInput(Paddle pad1, Paddle pad2){
         this.pad1 = pad1;

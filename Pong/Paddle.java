@@ -17,8 +17,8 @@ public class Paddle extends Rectangle{
     public Boolean checkContact(int y, double leftEdge, double rightEdge) {
         double upperBound = this.getY();
         double lowerBound = this.getY() + height;
-        if(upperBound<=y && y<=lowerBound){
-            if(leftEdge<=rightSide || rightEdge>=leftSide){
+        if(upperBound<y && y<lowerBound){
+            if(leftEdge==rightSide || rightEdge==leftSide){
                 return true;
             }
         }
@@ -26,11 +26,13 @@ public class Paddle extends Rectangle{
     }
 
     public void up(){
-        this.setLocation((int)this.getX(), (int)(this.getY()-movementSpeed));
+        if(this.getY()>0){
+        this.setLocation((int)this.getX(), (int)(this.getY()-movementSpeed));}
     }
 
     public void down(){
-            this.setLocation((int)this.getX(), (int)(this.getY()+movementSpeed)); 
+        if(this.getY()<PongRunner.getMaxWindowY()-height){
+            this.setLocation((int)this.getX(), (int)(this.getY()+movementSpeed));}
     }
 }
 
