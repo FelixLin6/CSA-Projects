@@ -34,12 +34,12 @@ public class Ball extends Rectangle{
 		try{
 			if(rightEdge<0) {
 				s2.update();
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				this.setLocation((int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
 			}
 			else if(leftEdge>PongRunner.getMaxWindowX()){
 				s1.update();
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				this.setLocation((int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
 			}
 		}

@@ -23,12 +23,12 @@ public class PongRunner extends GDV5 {
     public static void main(String[] args) {
         PongRunner runner = new PongRunner(); 
         runner.start();
-        runner.update();
     }
 
     public void update() { //60 frames per second
         game.updatePads(PongRunner.KeysPressed);
-    	ball.update(pad1.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius) || pad2.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius));
+        ball.update(ball.intersects(pad1) || ball.intersects(pad2));
+    	// ball.update(pad1.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius) || pad2.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius));
     }
 
     @Override
@@ -41,15 +41,17 @@ public class PongRunner extends GDV5 {
         win.drawRect((int)pad2.getX(),(int)pad2.getY(), (int)pad2.getWidth(), (int)pad2.getHeight());
         win.fillRect((int)pad2.getX(),(int)pad2.getY(), (int)pad2.getWidth(), (int)pad2.getHeight());
 
+        //draw net
+        win.drawRect((int)(PongRunner.getMaxWindowX()/2-5), 0, 10, (int)PongRunner.getMaxWindowY());
+
         //scores 1 and 2
         win.setFont(new Font("TimesRoman", Font.PLAIN, 70));
         win.drawString(score1.getScoreStr(), (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()/2));
         win.drawString(score2.getScoreStr(), (int)(PongRunner.getMaxWindowX()*3/4), (int)(PongRunner.getMaxWindowY()/2));
 
         //draw ball
-        win.setColor(Color.red);
-        win.drawOval((int)ball.getX(),(int)ball.getY(), (int)ball.getWidth(), (int)ball.getHeight());
         win.setColor(Color.blue);
+        win.drawOval((int)ball.getX(),(int)ball.getY(), (int)ball.getWidth(), (int)ball.getHeight());
         win.fillOval((int)ball.getX(), (int)ball.getY(), 25, 25);
     }
 
