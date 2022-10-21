@@ -3,8 +3,8 @@ import java.awt.Rectangle;
 
 public class Ball extends Rectangle{
 	public int radius;
-    private double dx = 4;
-	private double dy = 4;
+    private double dx;
+	private double dy;
 	Scoreboard s1;
 	Scoreboard s2;
 	
@@ -15,6 +15,13 @@ public class Ball extends Rectangle{
         this.radius = radius;
     }
     
+
+	public void setSpeed(int s){
+		this.dx = s;
+		this.dy = s;
+	}
+
+
     public void checkDir(boolean contact) {
 		double upperEdge = this.getCenterY()-radius;
 		double lowerEdge = this.getCenterY()+radius;
@@ -30,21 +37,13 @@ public class Ball extends Rectangle{
 	public void updateScore(){
 		double leftEdge = this.getCenterX()-radius;
 		double rightEdge = this.getCenterX()+radius;
-
-		try{
-			if(rightEdge<0) {
-				s2.update();
-				Thread.sleep(2000);
-				this.setLocation((int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
-			}
-			else if(leftEdge>PongRunner.getMaxWindowX()){
-				s1.update();
-				Thread.sleep(2000);
-				this.setLocation((int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
-			}
+		if(rightEdge<0) {
+			s2.update();
+			this.setLocation((int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
 		}
-		catch(InterruptedException e){
-			System.out.println("error: InturruptedException");
+		else if(leftEdge>PongRunner.getMaxWindowX()){
+			s1.update();
+			this.setLocation((int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
 		}
 	}
     
