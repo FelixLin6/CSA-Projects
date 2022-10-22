@@ -11,6 +11,8 @@ public class Interfaces {
         win.drawString("PONG", (int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
     }
 
+    public static void 
+
 
     public static void drawGame(Graphics2D win, Paddle pad1, Paddle pad2, Scoreboard score1, Scoreboard score2, Ball ball) {
          //draw paddles 1 and 2
