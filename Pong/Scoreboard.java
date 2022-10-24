@@ -11,6 +11,14 @@ public class Scoreboard {
         this.score+=1;
     }
 
+    public int getScore(){
+        return this.score;
+    }
+    
+    public void resetScore() {
+    	this.score=0;
+    }
+
     public String getScoreStr(){
         return Integer.toString(this.score);
     }

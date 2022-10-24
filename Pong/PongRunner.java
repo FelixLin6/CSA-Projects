@@ -19,9 +19,12 @@ public class PongRunner extends GDV5 {
     }
 
     public void checkScreen(){
-        if(screen==0 && (PongRunner.KeysPressed[KeyEvent.VK_ENTER])){screen=1; ball.setSpeed(6);}
+        if(screen==0 && (PongRunner.KeysPressed[KeyEvent.VK_ENTER])){screen=2; ball.setSpeed(6);}
         else if(screen==2 && (PongRunner.KeysPressed[KeyEvent.VK_ESCAPE])){screen=3; ball.setSpeed(0);}
-        else if(screen==3 && (PongRunner.KeysPressed[KeyEvent.VK_ENTER])){screen=1; ball.setSpeed(6);}
+        else if(screen==3 && (PongRunner.KeysPressed[KeyEvent.VK_ENTER])){screen=2; ball.setSpeed(6);}
+        else if(score1.getScore()==11){screen=4; ball.setSpeed(0); score1.resetScore();}
+        else if(score2.getScore()==11){screen=5; ball.setSpeed(0); score2.resetScore();}
+        else if((screen==4 || screen==5) && (PongRunner.KeysPressed[KeyEvent.VK_ENTER])){screen=0;}
     }
 
     public static void main(String[] args) {
@@ -41,5 +44,7 @@ public class PongRunner extends GDV5 {
         if(screen==0) {Interfaces.drawCover(win);}
         else if(screen==2) {Interfaces.drawGame(win, pad1, pad2, score1, score2, ball);}
         else if(screen==3) {Interfaces.drawPauseScreen(win);}
+        else if(screen==4) {Interfaces.drawPlayer1WinScreen(win);}
+        else if(screen==5) {Interfaces.drawPlayer2WinScreen(win);}
     }
 }

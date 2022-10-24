@@ -11,9 +11,6 @@ public class Interfaces {
         win.drawString("PONG", (int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
     }
 
-    public static void 
-
-
     public static void drawGame(Graphics2D win, Paddle pad1, Paddle pad2, Scoreboard score1, Scoreboard score2, Ball ball) {
          //draw paddles 1 and 2
         win.setColor(Color.white);
@@ -40,6 +37,24 @@ public class Interfaces {
     public static void drawPauseScreen(Graphics2D win) {
         win.setColor(Color.white);
         win.setFont(new Font("TimeRoman", Font.PLAIN, 80));
-        win.drawString("Paused", (int)(PongRunner.getMaxWindowY()/4), (int)(PongRunner.getMaxWindowX()/2));
+        win.drawString("Paused", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()*3/4));
+    }
+
+    public static void drawPlayer1WinScreen(Graphics2D win){
+        win.setColor(Color.white);
+        win.setFont(new Font("TimeRoman", Font.PLAIN, 80));
+        win.drawString("Player 1 Wins!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()/2));
+
+        win.setFont(new Font("TimeRoman", Font.PLAIN, 50));
+        win.drawString("Press enter to play again!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY())*3/4);
+    }
+
+    public static void drawPlayer2WinScreen(Graphics2D win){
+        win.setColor(Color.white);
+        win.setFont(new Font("TimeRoman", Font.PLAIN, 80));
+        win.drawString("Player 2 Wins!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()/2));
+
+        win.setFont(new Font("TimeRoman", Font.PLAIN, 50));
+        win.drawString("Press enter to play again!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()*3/4));
     }
 }
