@@ -1,14 +1,37 @@
 package Pong;
+import utilities.DemoObjects.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
 public class Interfaces {
 
-    public static void drawCover(Graphics2D win){
+    public static void drawCover(Graphics2D win, DemoPaddle demoPad1, DemoPaddle demoPad2, DemoBall demoBall, int x, int y, int winWidth, int winHeight){
         win.setColor(Color.white);
-        win.setFont(new Font("TimesRoman", Font.PLAIN, 100));
-        win.drawString("PONG", (int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()/2));
+        win.setFont(new Font("Courier", Font.ITALIC, 100));
+        win.drawString("PONG", (int)(PongRunner.getMaxWindowX()/2-142), (int)(PongRunner.getMaxWindowY()/3-50));
+        win.drawLine((int)(PongRunner.getMaxWindowX()/2), 0, (int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()));
+        win.drawLine(0, (int)(PongRunner.getMaxWindowY()/2), (int)(PongRunner.getMaxWindowX()), (int)(PongRunner.getMaxWindowY()/2));
+
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        win.drawString("Press any key to start", (int)(PongRunner.getMaxWindowX()/2-92), (int)(PongRunner.getMaxWindowY()/2+350));
+        
+        //draw demo window
+        win.drawRect(x, y, winWidth, winHeight);
+        win.drawRect((int)demoPad1.getX(),(int)demoPad1.getY(), (int)demoPad1.getWidth(), (int)demoPad1.getHeight());
+        win.fillRect((int)demoPad1.getX(),(int)demoPad1.getY(), (int)demoPad1.getWidth(), (int)demoPad1.getHeight());
+
+        win.drawRect((int)demoPad2.getX(),(int)demoPad2.getY(), (int)demoPad2.getWidth(), (int)demoPad2.getHeight());
+        win.fillRect((int)demoPad2.getX(),(int)demoPad2.getY(), (int)demoPad2.getWidth(), (int)demoPad2.getHeight());
+
+        //draw demo net
+        int netWidth = 4;
+        win.drawRect(x+winWidth/2-2, y, netWidth, winHeight);
+
+        //draw demo ball
+        win.setColor(Color.blue);
+        win.drawOval((int)demoBall.getX(),(int)demoBall.getY(), (int)demoBall.getWidth(), (int)demoBall.getHeight());
+        win.fillOval((int)demoBall.getX(), (int)demoBall.getY(), 14, 14);
     }
 
     public static void drawGame(Graphics2D win, Paddle pad1, Paddle pad2, Scoreboard score1, Scoreboard score2, Ball ball) {
@@ -36,8 +59,8 @@ public class Interfaces {
 
     public static void drawPauseScreen(Graphics2D win) {
         win.setColor(Color.white);
-        win.setFont(new Font("TimeRoman", Font.PLAIN, 80));
-        win.drawString("Paused", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()*3/4));
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 80));
+        win.drawString("Paused", (int)(PongRunner.getMaxWindowX()/9), (int)(PongRunner.getMaxWindowY()-100));
     }
 
     public static void drawPlayer1WinScreen(Graphics2D win){
