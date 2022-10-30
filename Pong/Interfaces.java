@@ -3,10 +3,11 @@ import utilities.DemoObjects.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public class Interfaces {
 
-    public static void drawCover(Graphics2D win, DemoPaddle demoPad1, DemoPaddle demoPad2, DemoBall demoBall, int x, int y, int winWidth, int winHeight){
+    public static void drawCover(Graphics2D win, DemoPaddle demoPad1, DemoPaddle demoPad2, DemoBall demoBall, int x, int y, int winWidth, int winHeight, Rectangle window){
         win.setColor(Color.white);
         win.setFont(new Font("Courier", Font.ITALIC, 100));
         win.drawString("PONG", (int)(PongRunner.getMaxWindowX()/2-142), (int)(PongRunner.getMaxWindowY()/3-50));
@@ -17,7 +18,10 @@ public class Interfaces {
         win.drawString("Press any key to start", (int)(PongRunner.getMaxWindowX()/2-92), (int)(PongRunner.getMaxWindowY()/2+350));
         
         //draw demo window
-        win.drawRect(x, y, winWidth, winHeight);
+        win.drawRect((int)window.getX(), (int)window.getY(),(int)window.getWidth(), (int)window.getHeight());
+        
+
+        //demo pads
         win.drawRect((int)demoPad1.getX(),(int)demoPad1.getY(), (int)demoPad1.getWidth(), (int)demoPad1.getHeight());
         win.fillRect((int)demoPad1.getX(),(int)demoPad1.getY(), (int)demoPad1.getWidth(), (int)demoPad1.getHeight());
 
@@ -65,19 +69,19 @@ public class Interfaces {
 
     public static void drawPlayer1WinScreen(Graphics2D win){
         win.setColor(Color.white);
-        win.setFont(new Font("TimeRoman", Font.PLAIN, 80));
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 80));
         win.drawString("Player 1 Wins!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()/2));
 
-        win.setFont(new Font("TimeRoman", Font.PLAIN, 50));
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 50));
         win.drawString("Press enter to play again!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY())*3/4);
     }
 
     public static void drawPlayer2WinScreen(Graphics2D win){
         win.setColor(Color.white);
-        win.setFont(new Font("TimeRoman", Font.PLAIN, 80));
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 80));
         win.drawString("Player 2 Wins!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()/2));
 
-        win.setFont(new Font("TimeRoman", Font.PLAIN, 50));
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 50));
         win.drawString("Press enter to play again!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()*3/4));
     }
 }

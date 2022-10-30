@@ -3,6 +3,8 @@ import utilities.GDV5;
 import utilities.DemoObjects.*;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.Rectangle;
+
 
 
 public class PongRunner extends GDV5 {
@@ -14,15 +16,17 @@ public class PongRunner extends GDV5 {
     Scoreboard score2 = new Scoreboard(0);
     Ball ball = new Ball(12, score1, score2);
     int screen = 0;
+    int count = 0;
 
     //demo objects on splash/menu screen, a demo of the game will be displayed in a 360x240 window placed at (40, 350)
     int demoX = 40;
     int demoY = 350;
-    int demoW = 360;
-    int demoH = 240;
+    int demoW = 374;
+    int demoH = 254 ;   
+    Rectangle window = new Rectangle(demoX, demoY, demoW, demoH);
     DemoBall demoBall = new DemoBall(7, demoY, demoY+demoH, demoX, demoY, demoW, demoH);
-    DemoPaddle demoPad1 = new DemoPaddle(demoX, 3, 30, demoY, demoY+demoH, demoY, demoH);
-    DemoPaddle demoPad2 = new DemoPaddle(demoX+demoW-3, 3, 30, demoY, demoY+demoH, demoY, demoH);
+    DemoPaddle demoPad1 = new DemoPaddle(demoX, 3, 30, demoY, demoY+demoH, demoY, demoH, demoBall);
+    DemoPaddle demoPad2 = new DemoPaddle(demoX+demoW-3, 3, 30, demoY, demoY+demoH, demoY, demoH, demoBall);
 
     public PongRunner() {
         super();
@@ -43,8 +47,8 @@ public class PongRunner extends GDV5 {
         else if((screen==4 || screen==5) && (PongRunner.KeysPressed[KeyEvent.VK_ENTER])){
             screen=0;
             this.demoBall = new DemoBall(7, demoY, demoY+demoH, demoX, demoY, demoW, demoH);
-            this.demoPad1 = new DemoPaddle(demoX, 3, 30, demoY, demoY+demoH, demoY, demoH);
-            this.demoPad2 = new DemoPaddle(demoX+demoW-3, 3, 30, demoY, demoY+demoH, demoY, demoH);
+            this.demoPad1 = new DemoPaddle(demoX, 3, 30, demoY, demoY+demoH, demoY, demoH, demoBall);
+            this.demoPad2 = new DemoPaddle(demoX+demoW-3, 3, 30, demoY, demoY+demoH, demoY, demoH, demoBall);
         }
     }
 
@@ -55,17 +59,21 @@ public class PongRunner extends GDV5 {
 
     public void update() { //60 frames per second
         if(screen==0){
+            demoPad1.update();
+            demoPad2.update();
             demoBall.update(demoBall.intersects(demoPad1) || demoBall.intersects(demoPad2));
+            
         }
         checkScreen();
         game.updatePads(PongRunner.KeysPressed);
         ball.update(ball.intersects(pad1) || ball.intersects(pad2));
+
     	// ball.update(pad1.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius) || pad2.checkContact((int)ball.getY(), ball.getCenterX()-ball.radius, ball.getCenterX()+ball.radius));
     }
 
     @Override
     public void draw(Graphics2D win) {
-        if(screen==0) {Interfaces.drawCover(win, demoPad1, demoPad2, demoBall, demoX, demoY, demoW, demoH);}
+        if(screen==0) {Interfaces.drawCover(win, demoPad1, demoPad2, demoBall, demoX, demoY, demoW, demoH, window);}
         else if(screen==2) {Interfaces.drawGame(win, pad1, pad2, score1, score2, ball);}
         else if(screen==3) {Interfaces.drawPauseScreen(win);}
         else if(screen==4) {Interfaces.drawPlayer1WinScreen(win);}
