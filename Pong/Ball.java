@@ -1,10 +1,12 @@
 package Pong;
 import java.awt.Rectangle;
+import java.awt.Color;
 
 public class Ball extends Rectangle{
 	public int radius;
     private double dx;
 	private double dy;
+	private Color color = Color.yellow;
 	Scoreboard s1;
 	Scoreboard s2;
 	
@@ -15,12 +17,30 @@ public class Ball extends Rectangle{
         this.radius = radius;
     }
     
-
 	public void setSpeed(int s){
 		this.dx = s;
 		this.dy = s;
 	}
 
+	public int getSpeed(){
+		return (int)dx;
+	}
+
+	public int getDx(){
+		return (int)this.dx;
+	}
+
+	public int getDy(){
+		return (int)this.dy;
+	}
+
+	public Color getColor(){
+		return this.color;
+	}
+
+	public void setColor(Color color){
+		this.color = color;
+	}
 
     public void checkDir(boolean contact) {
 		double upperEdge = this.getCenterY()-radius;
@@ -30,6 +50,7 @@ public class Ball extends Rectangle{
 			dy*=-1;
 		}
 		if(contact) {
+
 			dx*=-1;
 		}
     }

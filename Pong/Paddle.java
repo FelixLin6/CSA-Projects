@@ -7,6 +7,7 @@ public class Paddle extends Rectangle{
     // private double rightSide = width;
     // private double leftSide = PongRunner.getMaxWindowX()-width;
     private double movementSpeed = 15;
+    private int direction = 0;
 
     public Paddle(int x, int width, int height) {
         super(x, (int)(PongRunner.getMaxWindowY()/2-height/2), width, height);
@@ -14,6 +15,14 @@ public class Paddle extends Rectangle{
         this.height = height;
     }
 
+    public void resetDirection(){
+        this.direction = 0;
+    }
+
+
+    public int getDirection(){
+        return this.direction;
+    }
     //my own version of ball.intersects(pad1) :(
         
     // public Boolean checkContact(int y, double leftEdge, double rightEdge) {
@@ -30,11 +39,13 @@ public class Paddle extends Rectangle{
     public void up(){
         if(this.getY()>0){
         this.setLocation((int)this.getX(), (int)(this.getY()-movementSpeed));}
+        this.direction = -1;
     }
 
     public void down(){
         if(this.getY()<PongRunner.getMaxWindowY()-height){
             this.setLocation((int)this.getX(), (int)(this.getY()+movementSpeed));}
+        this.direction = 1;
     }
 }
 

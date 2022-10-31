@@ -11,16 +11,27 @@ public class Interfaces {
         win.setColor(Color.white);
         win.setFont(new Font("Courier", Font.ITALIC, 100));
         win.drawString("PONG", (int)(PongRunner.getMaxWindowX()/2-142), (int)(PongRunner.getMaxWindowY()/3-50));
-        win.drawLine((int)(PongRunner.getMaxWindowX()/2), 0, (int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()));
-        win.drawLine(0, (int)(PongRunner.getMaxWindowY()/2), (int)(PongRunner.getMaxWindowX()), (int)(PongRunner.getMaxWindowY()/2));
+
+        //draw grid
+        // win.drawLine((int)(PongRunner.getMaxWindowX()/2), 0, (int)(PongRunner.getMaxWindowX()/2), (int)(PongRunner.getMaxWindowY()));
+        // win.drawLine(0, (int)(PongRunner.getMaxWindowY()/2), (int)(PongRunner.getMaxWindowX()), (int)(PongRunner.getMaxWindowY()/2));
 
         win.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        win.drawString("Press any key to start", (int)(PongRunner.getMaxWindowX()/2-92), (int)(PongRunner.getMaxWindowY()/2+350));
+        win.drawString("Press ENTER to start", (int)(PongRunner.getMaxWindowX()/2-92), (int)(PongRunner.getMaxWindowY()/2+350));
         
+
+        //draw win condition
+        win.drawString("First player to reach 11 points wins!", (int)(window.getX()), (int)(window.getY()-20));
+
+         //draw controls
+         win.drawString("Player 1 controls: W, S", (int)(PongRunner.getMaxWindowX()*3/4-20), (int)(PongRunner.getMaxWindowY()/2-50));
+         win.drawString("Smash ball: R, Slice ball: T", (int)(PongRunner.getMaxWindowX()*3/4-20), (int)(PongRunner.getMaxWindowY()/2-20));
+         win.drawString("Player 2 controls: ↑, ↓", (int)(PongRunner.getMaxWindowX()*3/4-20), (int)(PongRunner.getMaxWindowY()/2+10));
+         win.drawString("Smash ball: K  Slice ball: L", (int)(PongRunner.getMaxWindowX()*3/4-20), (int)(PongRunner.getMaxWindowY()/2+40));
+
         //draw demo window
         win.drawRect((int)window.getX(), (int)window.getY(),(int)window.getWidth(), (int)window.getHeight());
         
-
         //demo pads
         win.drawRect((int)demoPad1.getX(),(int)demoPad1.getY(), (int)demoPad1.getWidth(), (int)demoPad1.getHeight());
         win.fillRect((int)demoPad1.getX(),(int)demoPad1.getY(), (int)demoPad1.getWidth(), (int)demoPad1.getHeight());
@@ -56,7 +67,7 @@ public class Interfaces {
         win.drawString(score2.getScoreStr(), (int)(PongRunner.getMaxWindowX()*3/4), (int)(PongRunner.getMaxWindowY()/2));
 
         //draw ball
-        win.setColor(Color.blue);
+        win.setColor(ball.getColor());
         win.drawOval((int)ball.getX(),(int)ball.getY(), (int)ball.getWidth(), (int)ball.getHeight());
         win.fillOval((int)ball.getX(), (int)ball.getY(), 25, 25);
     }
@@ -73,7 +84,7 @@ public class Interfaces {
         win.drawString("Player 1 Wins!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()/2));
 
         win.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-        win.drawString("Press enter to play again!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY())*3/4);
+        win.drawString("Press SPACE to play again!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY())*3/4);
     }
 
     public static void drawPlayer2WinScreen(Graphics2D win){
@@ -82,6 +93,6 @@ public class Interfaces {
         win.drawString("Player 2 Wins!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()/2));
 
         win.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-        win.drawString("Press enter to play again!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()*3/4));
+        win.drawString("Press SPACE to play again!", (int)(PongRunner.getMaxWindowX()/4), (int)(PongRunner.getMaxWindowY()*3/4));
     }
 }

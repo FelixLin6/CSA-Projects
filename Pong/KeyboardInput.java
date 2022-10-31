@@ -17,5 +17,9 @@ public class KeyboardInput {
         else if(keys[KeyEvent.VK_S]){pad1.down();}
         else if(keys[KeyEvent.VK_UP]){pad2.up();}
         else if(keys[KeyEvent.VK_DOWN]){pad2.down();}
+        else{
+            pad1.resetDirection();
+            pad2.resetDirection();
+        }
     }
 }
