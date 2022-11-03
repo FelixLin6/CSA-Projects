@@ -2,22 +2,6 @@ package Pong;
 import java.awt.Rectangle;
 import java.awt.Color;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-import java.io.File;
-import java.io.IOException;
-import java.nio.channels.UnsupportedAddressTypeException;
-
-import javax.sound.sampled.*;
-
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-
 public class Ball extends Rectangle{
 	public int radius;
     private double dx;
@@ -25,35 +9,14 @@ public class Ball extends Rectangle{
 	private Color color = Color.yellow;
 	Scoreboard s1;
 	Scoreboard s2;
-	AudioInputStream audioStream;
-	Clip clip;
 	
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
     public Ball(int radius, Scoreboard score1, Scoreboard score2){
-=======
-    public Ball(int radius, Scoreboard score1, Scoreboard score2) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
->>>>>>> Stashed changes
-=======
-    public Ball(int radius, Scoreboard score1, Scoreboard score2) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
->>>>>>> Stashed changes
         super((int)(PongRunner.getMaxWindowX()/2), 280, radius*2, radius*2);
 		this.s1 = score1;
 		this.s2 = score2;
         this.radius = radius;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-		
-=======
-		File file = new File("utilities/pingpong.wav");
-		this.audioStream  = AudioSystem.getAudioInputStream(file);
-		this.clip = AudioSystem.getClip();
->>>>>>> Stashed changes
-=======
-		File file = new File("utilities/pingpong.wav");
-		this.audioStream  = AudioSystem.getAudioInputStream(file);
-		this.clip = AudioSystem.getClip();
->>>>>>> Stashed changes
+
     }
     
 	public void setSpeed(int s){
@@ -81,41 +44,19 @@ public class Ball extends Rectangle{
 		this.color = color;
 	}
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    public void checkDir(boolean contact){
-=======
-    public void checkDir(boolean contact) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
->>>>>>> Stashed changes
-=======
-    public void checkDir(boolean contact) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
->>>>>>> Stashed changes
-		double upperEdge = this.getCenterY()-radius;
-		double lowerEdge = this.getCenterY()+radius;
+public void checkDir(boolean contact){
+	double upperEdge = this.getCenterY()-radius;
+	double lowerEdge = this.getCenterY()+radius;
 
-    	if((int)upperEdge<=0 || (int)lowerEdge>=PongRunner.getMaxWindowY()) {
-			dy*=-1;
-		}
-		if(contact) {
-			dx*=-1;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-			try{
-				PongRunner.playSound("Ping Pong Ball Hit.wav");
-			}
-			catch (Exception e){
-				System.out.println(e);
-			}
-=======
-			clip.open(audioStream);
-			clip.start();
->>>>>>> Stashed changes
-=======
-			clip.open(audioStream);
-			clip.start();
->>>>>>> Stashed changes
-		}
-    }
+	if((int)upperEdge<=0 || (int)lowerEdge>=PongRunner.getMaxWindowY()) {
+		dy*=-1;
+	}
+	if(contact) {
+		dx*=-1;
+	}
+}
+
+
 
 	public void updateScore(){
 		double leftEdge = this.getCenterX()-radius;
