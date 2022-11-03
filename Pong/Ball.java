@@ -2,6 +2,7 @@ package Pong;
 import java.awt.Rectangle;
 import java.awt.Color;
 
+
 public class Ball extends Rectangle{
 	public int radius;
     private double dx;
@@ -53,6 +54,11 @@ public void checkDir(boolean contact){
 	}
 	if(contact) {
 		dx*=-1;
+		try{
+		PongRunner.playSound("Ping Pong Ball Hit.wav");}
+		catch(Exception e){
+			System.out.println("Error");
+		}
 	}
 }
 
