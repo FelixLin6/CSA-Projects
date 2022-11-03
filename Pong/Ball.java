@@ -3,13 +3,19 @@ import java.awt.Rectangle;
 import java.awt.Color;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 import java.io.File;
 import java.io.IOException;
 import java.nio.channels.UnsupportedAddressTypeException;
 
 import javax.sound.sampled.*;
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 public class Ball extends Rectangle{
@@ -23,7 +29,11 @@ public class Ball extends Rectangle{
 	Clip clip;
 	
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public Ball(int radius, Scoreboard score1, Scoreboard score2){
+=======
+    public Ball(int radius, Scoreboard score1, Scoreboard score2) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+>>>>>>> Stashed changes
 =======
     public Ball(int radius, Scoreboard score1, Scoreboard score2) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 >>>>>>> Stashed changes
@@ -32,7 +42,13 @@ public class Ball extends Rectangle{
 		this.s2 = score2;
         this.radius = radius;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		
+=======
+		File file = new File("utilities/pingpong.wav");
+		this.audioStream  = AudioSystem.getAudioInputStream(file);
+		this.clip = AudioSystem.getClip();
+>>>>>>> Stashed changes
 =======
 		File file = new File("utilities/pingpong.wav");
 		this.audioStream  = AudioSystem.getAudioInputStream(file);
@@ -66,7 +82,11 @@ public class Ball extends Rectangle{
 	}
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public void checkDir(boolean contact){
+=======
+    public void checkDir(boolean contact) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+>>>>>>> Stashed changes
 =======
     public void checkDir(boolean contact) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
 >>>>>>> Stashed changes
@@ -79,12 +99,17 @@ public class Ball extends Rectangle{
 		if(contact) {
 			dx*=-1;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			try{
 				PongRunner.playSound("Ping Pong Ball Hit.wav");
 			}
 			catch (Exception e){
 				System.out.println(e);
 			}
+=======
+			clip.open(audioStream);
+			clip.start();
+>>>>>>> Stashed changes
 =======
 			clip.open(audioStream);
 			clip.start();
