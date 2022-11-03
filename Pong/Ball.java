@@ -2,6 +2,7 @@ package Pong;
 import java.awt.Rectangle;
 import java.awt.Color;
 
+
 public class Ball extends Rectangle{
 	public int radius;
     private double dx;
@@ -10,11 +11,12 @@ public class Ball extends Rectangle{
 	Scoreboard s1;
 	Scoreboard s2;
 	
-    public Ball(int radius, Scoreboard score1, Scoreboard score2) {
+    public Ball(int radius, Scoreboard score1, Scoreboard score2){
         super((int)(PongRunner.getMaxWindowX()/2), 280, radius*2, radius*2);
 		this.s1 = score1;
 		this.s2 = score2;
         this.radius = radius;
+		
     }
     
 	public void setSpeed(int s){
@@ -42,7 +44,7 @@ public class Ball extends Rectangle{
 		this.color = color;
 	}
 
-    public void checkDir(boolean contact) {
+    public void checkDir(boolean contact){
 		double upperEdge = this.getCenterY()-radius;
 		double lowerEdge = this.getCenterY()+radius;
 
@@ -50,8 +52,13 @@ public class Ball extends Rectangle{
 			dy*=-1;
 		}
 		if(contact) {
-
 			dx*=-1;
+			try{
+				PongRunner.playSound("Ping Pong Ball Hit.wav");
+			}
+			catch (Exception e){
+				System.out.println(e);
+			}
 		}
     }
 

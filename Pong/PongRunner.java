@@ -7,6 +7,11 @@ import java.awt.Rectangle;
 import java.awt.Color;
 import java.lang.Math;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.*;
+
 
 
 public class PongRunner extends GDV5 {
@@ -35,6 +40,15 @@ public class PongRunner extends GDV5 {
         super();
     }
 
+    public static void playSound(String name) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		File file = new File("utilities/" + name);
+		AudioInputStream audioStream  = AudioSystem.getAudioInputStream(file);
+		Clip clip = AudioSystem.getClip();
+		clip.open(audioStream);
+		clip.start();
+	}
+
+
     public void checkScreen(){
         if(screen==0 && (PongRunner.KeysPressed[KeyEvent.VK_ENTER])){
             screen=2;
@@ -56,24 +70,34 @@ public class PongRunner extends GDV5 {
     }
 
     public void smashBallQuestionMark(boolean a, boolean b, boolean[] keysPressed){
-        if(a && Math.abs(ball.getSpeed())<9 && keysPressed[KeyEvent.VK_R]){
-            ball.setSpeed((int)(ball.getSpeed()*1.5));
+        try{
+            if(a && Math.abs(ball.getSpeed())<12 && keysPressed[KeyEvent.VK_R]){
+                ball.setSpeed((int)(ball.getSpeed()*1.5));
+                playSound("speedup.wav");
+            }
+            else if((a && Math.abs(ball.getSpeed())>2) && keysPressed[KeyEvent.VK_T]){
+                ball.setSpeed((int)(ball.getSpeed()/1.5));
+                playSound("slowdown.wav");
+            }
+            else if(b && Math.abs(ball.getSpeed())<12 && keysPressed[KeyEvent.VK_K]){
+                ball.setSpeed((int)(ball.getSpeed()*1.5));
+                playSound("speedup.wav");
+            }
+            else if((b && Math.abs(ball.getSpeed())>2) && keysPressed[KeyEvent.VK_L]){
+                ball.setSpeed((int)(ball.getSpeed()/1.5));
+                playSound("slowdown.wav");
+            }
         }
-        else if((a && Math.abs(ball.getSpeed())>2) && keysPressed[KeyEvent.VK_T]){
-            ball.setSpeed((int)(ball.getSpeed()/1.5));
-        }
-        else if(b && Math.abs(ball.getSpeed())<9 && keysPressed[KeyEvent.VK_K]){
-            ball.setSpeed((int)(ball.getSpeed()*1.5));
-        }
-        else if((b && Math.abs(ball.getSpeed())>2) && keysPressed[KeyEvent.VK_L]){
-            ball.setSpeed((int)(ball.getSpeed()/1.5));
+        catch (Exception e){
+            System.out.println(e);
         }
     }
 
     public void checkColor(){
         if(Math.abs(ball.getSpeed())<6){ball.setColor(Color.BLUE);}
         else if(Math.abs(ball.getSpeed())==6){ball.setColor(Color.YELLOW);}
-        else if(Math.abs(ball.getSpeed())>6){ball.setColor(Color.RED);}
+        else if(Math.abs(ball.getSpeed())<=9){ball.setColor(Color.PINK);}
+        else if(Math.abs(ball.getSpeed())>9){ball.setColor(Color.RED);}
     }
 
     public static void main(String[] args) {
