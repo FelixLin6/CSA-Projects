@@ -19,13 +19,19 @@ public class Brick extends Rectangle{
         pb.draw(this);
     }
 
-    public static Brick[] makeBricks(){
-        Brick[] bricks = new Brick[12];
+    public static Brick[][] makeBricks(){
+        Brick[][] bricks = new Brick[4][10];
         int x = 0;
         int y = 50;
-        for(int i=0; i< bricks.length; i++){
-            bricks[i] = new Brick(x, y, Color.blue);
-            x += GDV5.getMaxWindowX()/12;
+        Color[] cols = new Color[]{Color.blue, Color.red, Color.orange, Color.green};
+        for(int i=0; i<bricks.length; i++){
+            Brick[] b = bricks[i];
+            Color col = cols[i];
+            for(int j=0; i<b.length; i++){
+                b[j] = new Brick(x, y, col);
+                x += GDV5.getMaxWindowX()/12;
+            }
+            y += 20;
         }
         return bricks;
     }

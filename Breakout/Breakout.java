@@ -13,7 +13,7 @@ import javax.sound.sampled.*;
 
 public class Breakout extends GDV5 {
 
-    private Brick[] bricks;
+    private Brick[][] bricks;
 
     public Breakout() {
         super();
@@ -40,8 +40,10 @@ public class Breakout extends GDV5 {
 
     @Override
     public void draw(Graphics2D win) {
-        for(Brick b:bricks){
+        for(Brick[] row:bricks){
+            for(Brick b: row){
             b.draw(win);
+            }
         }
     }
 }
