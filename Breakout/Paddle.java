@@ -8,7 +8,7 @@ public class Paddle extends Rectangle{
     private int movementSpeed = 15;
 
     public Paddle(int width, int height) {
-        super((int)(Breakout.getMaxWindowX()/2-width/2), (int)(Breakout.getMaxWindowY()-20), width, height);
+        super((int)(Breakout.getMaxWindowX()/2-width/2), (int)(Breakout.getMaxWindowY()-100), width, height);
         this.width = width;
     }
 

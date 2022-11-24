@@ -1,6 +1,5 @@
 package Breakout;
 import java.awt.Rectangle;
-import java.awt.Color;
 import java.lang.Math;
 
 
