@@ -15,7 +15,7 @@ public class Brick extends Rectangle{
 
     public static Color getColor(int index){
         try{
-        return colors[(colors.length-1)%index];
+        return colors[index%(colors.length-1)];
         }
         catch(ArithmeticException e){
             return colors[0];

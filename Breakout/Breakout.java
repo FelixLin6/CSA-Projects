@@ -14,6 +14,9 @@ import javax.sound.sampled.*;
 public class Breakout extends GDV5 {
 
     private Brick[][] bricks;
+    Paddle pad = new Paddle(120, 15);
+    KeyboardInput game = new KeyboardInput(pad);
+    Ball ball = new Ball(12);
 
     public Breakout() {
         super();
@@ -35,7 +38,8 @@ public class Breakout extends GDV5 {
     }
 
     public void update() { //60 frames per second
-
+        game.updatePads(Breakout.KeysPressed);
+        ball.update(ball.intersects(pad));
     }
 
     @Override
@@ -45,5 +49,6 @@ public class Breakout extends GDV5 {
             b.draw(win);
             }
         }
+        pad.draw(win);
     }
 }
