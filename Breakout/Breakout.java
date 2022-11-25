@@ -16,7 +16,8 @@ public class Breakout extends GDV5 {
     private Brick[][] bricks;
     Paddle pad = new Paddle(120, 15);
     KeyboardInput game = new KeyboardInput(pad);
-    Ball ball = new Ball(12);
+    Ball ball = new Ball(12, 6);
+
 
     public Breakout() {
         super();
@@ -31,7 +32,7 @@ public class Breakout extends GDV5 {
 		clip.start();
 	}
 
-
+    
     public static void main(String[] args) {
         Breakout runner = new Breakout(); 
         runner.start();
@@ -50,5 +51,6 @@ public class Breakout extends GDV5 {
             }
         }
         pad.draw(win);
+        ball.draw(win);
     }
 }

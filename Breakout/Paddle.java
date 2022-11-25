@@ -21,7 +21,7 @@ public class Paddle extends Rectangle{
 
     public void left(){
         if(this.getX()>0){
-        this.setLocation((int)this.getX(), (int)(this.getY()-movementSpeed));}
+        this.setLocation((int)(this.getX()-movementSpeed), (int)this.getY());}
     }
 
     public void right(){

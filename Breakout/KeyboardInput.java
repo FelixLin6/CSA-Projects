@@ -13,6 +13,6 @@ public class KeyboardInput {
 
     public void updatePads(boolean[] keys) {
         if(keys[KeyEvent.VK_LEFT]){pad.left() ;}
-        else if(keys[KeyEvent.VK_S]){pad.right();}
+        else if(keys[KeyEvent.VK_RIGHT]){pad.right();}
     }
 }
