@@ -14,14 +14,15 @@ import javax.sound.sampled.*;
 public class Breakout extends GDV5 {
 
     private Brick[][] bricks;
-    Paddle pad = new Paddle(120, 15);
-    KeyboardInput game = new KeyboardInput(pad);
-    Ball ball = new Ball(12, 6);
+    private Paddle pad = new Paddle(120, 15);
+    private KeyboardInput game = new KeyboardInput(pad);
+    private Ball ball = new Ball(12, 6);
+    private int level = 1;
 
 
     public Breakout() {
         super();
-        bricks = Brick.makeBricks();
+        bricks = Brick.makeBricks(level);
     }
 
     public static void playSound(String name) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
