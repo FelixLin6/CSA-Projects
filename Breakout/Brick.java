@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 
 public class Brick extends Rectangle{
     private Color col;
-    private static Color[] colors = {Color.decode("#fbf8cc"), Color.decode("#fde4cf"), Color.decode("#ffcfd2"), Color.decode("#f1c0e8"), Color.decode("#cfbaf0"), Color.decode("#a3c4f3"), Color.decode("#90dbf4"), Color.decode("#8eecf5"), Color.decode("#98f5e1"), Color.decode("#b9fbc0"), };
+    private static Color[] colors = {Color.decode("#fbf8cc"), Color.decode("#fde4cf"), Color.decode("#ffcfd2"), Color.decode("#f1c0e8"), Color.decode("#cfbaf0"), Color.decode("#a3c4f3"), Color.decode("#90dbf4"), Color.decode("#8eecf5"), Color.decode("#98f5e1"), Color.decode("#b9fbc0")};
 
     public Brick(int x, int y, Color c){
         super(x, y, GDV5.getMaxWindowX()/12, 25);
