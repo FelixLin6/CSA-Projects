@@ -6,40 +6,52 @@ import java.awt.Graphics2D;
 
 public class Brick extends Rectangle{
     private Color col;
-    private static Color[] colors = {Color.decode("#fbf8cc"), Color.decode("#fde4cf"), Color.decode("#ffcfd2"), Color.decode("#f1c0e8"), Color.decode("#cfbaf0"), Color.decode("#a3c4f3"), Color.decode("#90dbf4"), Color.decode("#8eecf5"), Color.decode("#98f5e1"), Color.decode("#b9fbc0")};
+    private static Color[] palette;
+    private static int maxX = GDV5.getMaxWindowX();
+    private static int maxY = GDV5.getMaxWindowY();
+    private static int width = maxX/10;
+    private static int height = width/4;
+    private static int cols = 9;
+    private static int spacing = (maxX-cols*width)/(cols+1);
 
     public Brick(int x, int y, Color c){
-        super(x, y, GDV5.getMaxWindowX()/12, 25);
+        super(x, y, width, height);
         col = c;
     }
 
-    public static Color getColor(int index){
+    public static void decodePalette(String[] codes){
+        palette = new Color[codes.length];
+        for(int i=0; i<codes.length; i++){
+            palette[i] = Color.decode(codes[i]);
+        }
+    }
+
+    public static Color getPalette(int index){
         try{
-        return colors[index%(colors.length-1)];
+        return palette[index%(palette.length-1)];
         }
         catch(ArithmeticException e){
-            return colors[0];
+            return palette[0];
         }
     }
 
     public void draw(Graphics2D pb){
         pb.setColor(col);
         pb.fill(this);
-        pb.setColor(Color.white);
         pb.draw(this);
     }
 
     public static Brick[][] makeBricks(int level){
-        Brick[][] bricks = new Brick[10][2+level];
-        int x = 20;
+        Brick[][] bricks = new Brick[2+level][cols];
+        int x = spacing;
         int y = 10;
         for(int i=0; i<bricks.length; i++){
             Brick[] b = bricks[i];
             for(int j=0; j<b.length; j++){
-                b[j] = new Brick(x, y, getColor(i));
-                x += (GDV5.getMaxWindowX()/12+GDV5.getMaxWindowX()/36);
+                b[j] = new Brick(x, y, getPalette(i));
+                x += (width + spacing);
             }
-            x=20;
+            x=spacing;
             y+=30;
         }
         return bricks;

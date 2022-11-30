@@ -1,6 +1,7 @@
 package Breakout;
 import utilities.GDV5;
 import java.awt.Graphics2D;
+import utilities.ColorPalettes;
 
 
 import java.io.File;
@@ -35,6 +36,7 @@ public class Breakout extends GDV5 {
 
     
     public static void main(String[] args) {
+        Brick.decodePalette(ColorPalettes.palette2);
         Breakout runner = new Breakout(); 
         runner.start();
     }
