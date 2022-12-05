@@ -19,6 +19,10 @@ public class Brick extends Rectangle{
         col = c;
     }
 
+    public static int height(){
+        return height;
+    }
+
     public static void decodePalette(String[] codes){
         palette = new Color[codes.length];
         for(int i=0; i<codes.length; i++){
@@ -33,6 +37,11 @@ public class Brick extends Rectangle{
         catch(ArithmeticException e){
             return palette[0];
         }
+    }
+
+    public void pop(){
+        this.col = Color.black;
+        this.setSize(0, 0);
     }
 
     public void draw(Graphics2D pb){
