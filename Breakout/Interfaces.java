@@ -1,53 +1,22 @@
 package Breakout;
-import utilities.DemoObjects.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
 public class Interfaces {
 
-    // public static void drawCover(Graphics2D win, DemoPaddle demoPad1, DemoPaddle demoPad2, DemoBall demoBall, int x, int y, int winWidth, int winHeight, Rectangle window){
-    //     win.setColor(Color.white);
-    //     win.setFont(new Font("Courier", Font.ITALIC, 100));
-    //     win.drawString("PONG", (int)(Breakout.getMaxWindowX()/2-142), (int)(Breakout.getMaxWindowY()/3-50));
+    public static void drawCover(Graphics2D win){
+        win.setColor(Color.white);
+        win.setFont(new Font("Courier", Font.PLAIN, Breakout.getMaxWindowX()*5/50));
+        win.drawString("BREAKOUT", (int)(Breakout.getMaxWindowX()/2-210), (int)(Breakout.getMaxWindowY()/3-50));
 
-    //     //draw grid
-    //     // win.drawLine((int)(Breakout.getMaxWindowX()/2), 0, (int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()));
-    //     // win.drawLine(0, (int)(Breakout.getMaxWindowY()/2), (int)(Breakout.getMaxWindowX()), (int)(Breakout.getMaxWindowY()/2));
+        //draw grid
+        win.drawLine((int)(Breakout.getMaxWindowX()/2), 0, (int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()));
+        win.drawLine(0, (int)(Breakout.getMaxWindowY()/2), (int)(Breakout.getMaxWindowX()), (int)(Breakout.getMaxWindowY()/2));
 
-    //     win.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-    //     win.drawString("Press ENTER to start", (int)(Breakout.getMaxWindowX()/2-92), (int)(Breakout.getMaxWindowY()/2+350));
-        
-
-    //     //draw win condition
-    //     win.drawString("First player to reach 11 points wins!", (int)(window.getX()), (int)(window.getY()-20));
-
-    //      //draw controls
-    //      win.drawString("Player 1 controls: W, S", (int)(Breakout.getMaxWindowX()*3/4-20), (int)(Breakout.getMaxWindowY()/2-50));
-    //      win.drawString("Smash ball: R, Slice ball: T", (int)(Breakout.getMaxWindowX()*3/4-20), (int)(Breakout.getMaxWindowY()/2-20));
-    //      win.drawString("Player 2 controls: ↑, ↓", (int)(Breakout.getMaxWindowX()*3/4-20), (int)(Breakout.getMaxWindowY()/2+10));
-    //      win.drawString("Smash ball: K  Slice ball: L", (int)(Breakout.getMaxWindowX()*3/4-20), (int)(Breakout.getMaxWindowY()/2+40));
-
-    //     //draw demo window
-    //     win.drawRect((int)window.getX(), (int)window.getY(),(int)window.getWidth(), (int)window.getHeight());
-        
-    //     //demo pads
-    //     win.drawRect((int)demoPad1.getX(),(int)demoPad1.getY(), (int)demoPad1.getWidth(), (int)demoPad1.getHeight());
-    //     win.fillRect((int)demoPad1.getX(),(int)demoPad1.getY(), (int)demoPad1.getWidth(), (int)demoPad1.getHeight());
-
-    //     win.drawRect((int)demoPad2.getX(),(int)demoPad2.getY(), (int)demoPad2.getWidth(), (int)demoPad2.getHeight());
-    //     win.fillRect((int)demoPad2.getX(),(int)demoPad2.getY(), (int)demoPad2.getWidth(), (int)demoPad2.getHeight());
-
-    //     //draw demo net
-    //     int netWidth = 4;
-    //     win.drawRect(x+winWidth/2-2, y, netWidth, winHeight);
-
-    //     //draw demo ball
-    //     win.setColor(Color.blue);
-    //     win.drawOval((int)demoBall.getX(),(int)demoBall.getY(), (int)demoBall.getWidth(), (int)demoBall.getHeight());
-    //     win.fillOval((int)demoBall.getX(), (int)demoBall.getY(), 14, 14);
-    // }
+        win.setFont(new Font("Courier", Font.PLAIN, 30));
+        win.drawString("Press ENTER to start", (int)(Breakout.getMaxWindowX()/2-140), (int)(Breakout.getMaxWindowY()/2+200));
+    }
 
     public static void drawGame(Graphics2D win, Paddle pad1, Paddle pad2, Ball ball) {
          //draw paddles 1 and 2

@@ -7,8 +7,9 @@ public class Scoreboard {
     private int score;
     private int size;
 
-    Scoreboard(int x, int rows, int size) {
+    Scoreboard(int x, int size) {
         this.score = x;
+        this.size = size;
     }
 
     public void update(){
@@ -23,6 +24,10 @@ public class Scoreboard {
         return this.score;
     }
     
+    public void setScore(int s){
+        this.score = s;
+    }
+    
     public void resetScore() {
     	this.score=0;
     }
@@ -32,8 +37,8 @@ public class Scoreboard {
     }
 
     public void draw(Graphics2D pb){
-        pb.setFont(new Font("TimesRoman", Font.PLAIN, size));
+        pb.setFont(new Font("Courier", Font.PLAIN, this.size));
         pb.setColor(Color.white);
-        pb.drawString(this.getScoreStr(), (int)(Breakout.getMaxWindowX()/2-(size*3/8)), (int)(Breakout.getMaxWindowY()/2));
+        pb.drawString(this.getScoreStr(), (int)(Breakout.getMaxWindowX()/2-(this.size*1/2)), (int)(Breakout.getMaxWindowY()/2));
     }
 }

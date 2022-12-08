@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import utilities.ColorPalettes;
 import java.awt.event.KeyEvent;
 
-
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
@@ -17,8 +16,9 @@ public class Breakout extends GDV5 {
     private Brick[][] bricks;
     private Paddle pad = new Paddle(120, 15);
     private KeyboardInput game = new KeyboardInput(pad);
-    private Scoreboard score = new Scoreboard(0, level, 100);
-    private Ball ball = new Ball(12, 0, score);
+    private Scoreboard score = new Scoreboard(0, 100);
+    private int speed;
+    private Ball ball = new Ball(12, speed, score);
     private int gameState = 0;
     
 
@@ -36,21 +36,16 @@ public class Breakout extends GDV5 {
 		clip.start();
 	}
 
-    public void checkgameState(){
+    public void checkGameState(){
         if(gameState==0 && (Breakout.KeysPressed[KeyEvent.VK_ENTER])){
             gameState=1;
             ball.setSpeed(6);
         }
-        else if(gameState==1 && (Breakout.KeysPressed[KeyEvent.VK_ESCAPE])){gameState=2; ball.setSpeed(0);}
-        else if(gameState==3 && (Breakout.KeysPressed[KeyEvent.VK_ENTER])){gameState=2; ball.setSpeed(speed);}
-        else if(score1.getScore()==11){gameState=4; ball.setSpeed(0); score1.resetScore();}
-        else if(score2.getScore()==11){gameState=5; ball.setSpeed(0); score2.resetScore();}
-        else if((gameState==4 || gameState==5) && (Breakout.KeysPressed[KeyEvent.VK_SPACE])){
-            gameState=0;
-            this.demoBall = new DemoBall(7, demoY, demoY+demoH, demoX, demoY, demoW, demoH);
-            this.demoPad1 = new DemoPaddle(demoX, 3, 30, demoY, demoY+demoH, demoY, demoH, demoBall);
-            this.demoPad2 = new DemoPaddle(demoX+demoW-3, 3, 30, demoY, demoY+demoH, demoY, demoH, demoBall);
-        }
+        else if(gameState==1 && (Breakout.KeysPressed[KeyEvent.VK_ESCAPE])){gameState=2; this.speed = ball.getSpeed(); ball.setSpeed(0);}
+        else if(gameState==2 && (Breakout.KeysPressed[KeyEvent.VK_ENTER])){gameState=1; ball.setSpeed(this.speed);}
+        else if(gameState==1 && this.score.getScore()==Brick.numBricks()){gameState=3; ball.setSpeed(0); score.resetScore();}
+        else if(gameState==1 && (Breakout.KeysPressed[KeyEvent.VK_P])){score.setScore(Brick.numBricks());}
+        else if((gameState==3) && (Breakout.KeysPressed[KeyEvent.VK_SPACE])){gameState=0;}
     }
     
     public static void main(String[] args) {
@@ -60,24 +55,31 @@ public class Breakout extends GDV5 {
     }
 
     public void update() { //60 frames per second
+        this.checkGameState();
         game.updatePads(Breakout.KeysPressed);
         ball.update(ball.intersects(pad), bricks);
     }
 
     @Override
     public void draw(Graphics2D win) {
-        // if (gameState==0){
-        //     Interfaces.drawCover(win, null, null, null, ALLBITS, ABORT, WIDTH, HEIGHT, ball);
-        // }
-        if(gameState==1){
-        for(Brick[] row:bricks){
-            for(Brick b: row){
-            b.draw(win);
-            }
+        if (gameState==0){
+            Interfaces.drawCover(win);
         }
-        pad.draw(win);
-        ball.draw(win);
-        score.draw(win);
+        else if(gameState==1){
+            for(Brick[] row:bricks){
+                for(Brick b: row){
+                b.draw(win);
+                }
+            }
+            pad.draw(win);
+            ball.draw(win);
+            score.draw(win);
+        }
+        else if(gameState==2){
+            Interfaces.drawPauseScreen(win);
+        }
+        else if(gameState==3){
+            Interfaces.drawPlayer1WinScreen(win);
         }
     }
 }

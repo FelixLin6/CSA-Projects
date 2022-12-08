@@ -35,6 +35,10 @@ public class Ball extends Rectangle{
 		this.col = c;
 	}
 	
+	public int getSpeed(){
+		return (int)dx;
+	}
+	
 	public Color getColor(){
 		return col;
 	}

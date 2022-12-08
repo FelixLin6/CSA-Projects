@@ -13,6 +13,8 @@ public class Brick extends Rectangle{
     private static int height = width/4;
     private static int cols = 9;
     private static int spacing = (maxX-cols*width)/(cols+1);
+    private static int level;
+    private static int numBricks = (2+level)*cols;
 
     public Brick(int x, int y, Color c){
         super(x, y, width, height);
@@ -39,6 +41,10 @@ public class Brick extends Rectangle{
         }
     }
 
+    public static int numBricks(){
+        return numBricks;
+    }
+
     public void pop(){
         this.col = Color.black;
         this.setSize(0, 0);
@@ -51,6 +57,7 @@ public class Brick extends Rectangle{
     }
 
     public static Brick[][] makeBricks(int level){
+        Brick.level = level;
         Brick[][] bricks = new Brick[2+level][cols];
         int x = spacing;
         int y = 10;
