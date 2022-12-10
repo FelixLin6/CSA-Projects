@@ -1,7 +1,7 @@
 package Breakout;
-import utilities.GDV5;
+import utilities.DemoObjects.*;
+import utilities.*;
 import java.awt.Graphics2D;
-import utilities.ColorPalettes;
 import java.awt.event.KeyEvent;
 
 import java.io.File;
@@ -19,8 +19,8 @@ public class Breakout extends GDV5 {
     private Scoreboard score = new Scoreboard(0, 100);
     private int speed;
     private Ball ball = new Ball(12, speed, score);
+    private BreakoutDemo demo = new BreakoutDemo();
     private int gameState = 0;
-    
 
 
     public Breakout() {
@@ -52,34 +52,37 @@ public class Breakout extends GDV5 {
         Brick.decodePalette(ColorPalettes.palette2);
         Breakout runner = new Breakout(); 
         runner.start();
+        
     }
 
     public void update() { //60 frames per second
-        this.checkGameState();
-        game.updatePads(Breakout.KeysPressed);
-        ball.update(ball.intersects(pad), bricks);
+        // this.checkGameState();
+        // game.updatePads(Breakout.KeysPressed);
+        // ball.update(ball.intersects(pad), bricks);
     }
 
     @Override
     public void draw(Graphics2D win) {
-        if (gameState==0){
-            Interfaces.drawCover(win);
-        }
-        else if(gameState==1){
-            for(Brick[] row:bricks){
-                for(Brick b: row){
-                b.draw(win);
-                }
-            }
-            pad.draw(win);
-            ball.draw(win);
-            score.draw(win);
-        }
-        else if(gameState==2){
-            Interfaces.drawPauseScreen(win);
-        }
-        else if(gameState==3){
-            Interfaces.drawPlayer1WinScreen(win);
-        }
+        demo.draw(win);
     }
+    //     if (gameState==0){
+    //         Interfaces.drawCover(win, demo);
+    //     }
+    //     else if(gameState==1){
+    //         for(Brick[] row:bricks){
+    //             for(Brick b: row){
+    //             b.draw(win);
+    //             }
+    //         }
+    //         pad.draw(win);
+    //         ball.draw(win);
+    //         score.draw(win);
+    //     }
+    //     else if(gameState==2){
+    //         Interfaces.drawPauseScreen(win);
+    //     }
+    //     else if(gameState==3){
+    //         Interfaces.drawPlayer1WinScreen(win);
+    //     }
+    // }
 }

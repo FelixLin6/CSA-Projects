@@ -1,22 +1,24 @@
-package Breakout;
-import utilities.GDV5;
+package utilities.DemoObjects;
 import java.awt.Rectangle;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import utilities.ColorPalettes;
 
-public class Brick extends Rectangle{
-    private Color col;
+public class DemoBrick extends Rectangle{
+    public Color col;
     private static Color[] palette;
-    private static int maxX = GDV5.getMaxWindowX();
-    private static int maxY = GDV5.getMaxWindowY();
+    public static int maxX = 375;
+    public static int maxY = 254;
     private static int width = maxX/10;
     private static int height = width/4;
-    private static int cols = 9;
+    private static int cols = 5;
     private static int spacing = (maxX-cols*width)/(cols+1);
-    private static int level;
+    private static int level = 4;
     private static int numBricks;
+    public static int winX = 40;
+    public static int winY = 350;
 
-    public Brick(int x, int y, Color c){
+    public DemoBrick(int x, int y, Color c){
         super(x, y, width, height);
         col = c;
     }
@@ -25,19 +27,20 @@ public class Brick extends Rectangle{
         return height;
     }
 
-    public static void decodePalette(String[] codes){
+    public static Color[] decodePalette(String[] codes){
         palette = new Color[codes.length];
         for(int i=0; i<codes.length; i++){
             palette[i] = Color.decode(codes[i]);
         }
+        return palette;
     }
 
-    public static Color getPalette(int index){
+    public static Color getPalette(int index, Color[] plt){
         try{
-        return palette[index%(palette.length-1)];
+        return plt[index%(palette.length-1)];
         }
         catch(ArithmeticException e){
-            return palette[0];
+            return plt[0];
         }
     }
 
@@ -56,20 +59,22 @@ public class Brick extends Rectangle{
         pb.draw(this);
     }
 
-    public static Brick[][] makeBricks(int level){
-        Brick.level = level;
-        Brick[][] bricks = new Brick[2+level][cols];
+    public static DemoBrick[][] makeBricks(){
+        Color[] palette = decodePalette(ColorPalettes.palette1);
+        DemoBrick[][] bricks = new DemoBrick[2+level][cols];
         numBricks = bricks.length * bricks[0].length;
-        int x = spacing;
-        int y = 10;
+        int x = spacing + winX;
+        int y = winY;
+        System.out.println(x);
+        System.out.println(y);
         for(int i=0; i<bricks.length; i++){
-            Brick[] b = bricks[i];
+            DemoBrick[] b = bricks[i];
             for(int j=0; j<b.length; j++){
-                b[j] = new Brick(x, y, getPalette(i));
+                b[j] = new DemoBrick(x, y, getPalette(i, palette));
                 x += (width + spacing);
             }
             x=spacing;
-            y+=30;
+            y+=10;
         }
         return bricks;
     }
