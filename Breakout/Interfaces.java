@@ -7,25 +7,28 @@ import java.awt.Graphics2D;
 public class Interfaces {
     public static void drawCover(Graphics2D win, BreakoutDemo demo){
         win.setColor(Color.white);
-        win.setFont(new Font("Courier", Font.ITALIC, 100));
-        win.drawString("PONG", (int)(Breakout.getMaxWindowX()/2-142), (int)(Breakout.getMaxWindowY()/3-50));
+        win.setFont(new Font("Courier", Font.PLAIN, Breakout.getMaxWindowX()*4/50));
+        win.drawString("BREAKOUT", (int)(Breakout.getMaxWindowX()/2-260), (int)(Breakout.getMaxWindowY()/3-50));
 
         //draw grid
-        // win.drawLine((int)(Breakout.getMaxWindowX()/2), 0, (int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()));
-        // win.drawLine(0, (int)(Breakout.getMaxWindowY()/2), (int)(Breakout.getMaxWindowX()), (int)(Breakout.getMaxWindowY()/2));
+        win.drawLine((int)(Breakout.getMaxWindowX()/2), 0, (int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()));
+        win.drawLine(0, (int)(Breakout.getMaxWindowY()/2), (int)(Breakout.getMaxWindowX()), (int)(Breakout.getMaxWindowY()/2));
 
-        win.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        win.drawString("Press ENTER to start", (int)(Breakout.getMaxWindowX()/2-92), (int)(Breakout.getMaxWindowY()/2+350));
+        win.setFont(new Font("Courier", Font.PLAIN, 30));
+        win.drawString("Press ENTER to start", (int)(Breakout.getMaxWindowX()/2-150), (int)(Breakout.getMaxWindowY()*3/4+130));
         
 
         //draw win condition
-        win.drawString("First player to reach 11 points wins!", (int)(demo.getWinX()), (int)(demo.getWinY()-20));
+        win.setFont(new Font("Courier", Font.PLAIN, 20));
+        win.drawString("Shoot down all the bricks in each level to win...", (int)(demo.getWinX()), (int)(demo.getWinY()-70));
+        win.drawString("The # of layers increases as the level increases...", (int)(demo.getWinX()), (int)(demo.getWinY()-40));
+        win.drawString("Lose if you miss the ball's rebound!", (int)(demo.getWinX()), (int)(demo.getWinY()-10));
 
          //draw controls
-         win.drawString("Player 1 controls: W, S", (int)(Breakout.getMaxWindowX()*3/4-20), (int)(Breakout.getMaxWindowY()/2-50));
-         win.drawString("Smash ball: R, Slice ball: T", (int)(Breakout.getMaxWindowX()*3/4-20), (int)(Breakout.getMaxWindowY()/2-20));
-         win.drawString("Player 2 controls: ↑, ↓", (int)(Breakout.getMaxWindowX()*3/4-20), (int)(Breakout.getMaxWindowY()/2+10));
-         win.drawString("Smash ball: K  Slice ball: L", (int)(Breakout.getMaxWindowX()*3/4-20), (int)(Breakout.getMaxWindowY()/2+40));
+         win.drawString("Paddle controls: ←, →", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(Breakout.getMaxWindowY()/2-80));
+         win.drawString("Ball controls (when using the ability)", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(Breakout.getMaxWindowY()/2));
+         win.drawString("[Telekinesis]: W, A, S, D", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(Breakout.getMaxWindowY()/2+40));
+         
 
         //draw demo 
         demo.draw(win);
@@ -41,48 +44,64 @@ public class Interfaces {
         win.drawLine(0, (int)(Breakout.getMaxWindowY()/2), (int)(Breakout.getMaxWindowX()), (int)(Breakout.getMaxWindowY()/2));
 
         win.setFont(new Font("Courier", Font.PLAIN, 30));
-        win.drawString("Press ENTER to start", (int)(Breakout.getMaxWindowX()/2-140), (int)(Breakout.getMaxWindowY()/2+200));
+        win.drawString("Press ENTER to start", (int)(Breakout.getMaxWindowX()/2-140), (int)(Breakout.getMaxWindowY()/2));
     }
 
-    public static void drawGame(Graphics2D win, Paddle pad1, Paddle pad2, Ball ball) {
-         //draw paddles 1 and 2
-        win.setColor(Color.white);
-        win.drawRect((int)pad1.getX(),(int)pad1.getY(), (int)pad1.getWidth(), (int)pad1.getHeight());
-        win.fillRect((int)pad1.getX(),(int)pad1.getY(), (int)pad1.getWidth(), (int)pad1.getHeight());
-
-        win.drawRect((int)pad2.getX(),(int)pad2.getY(), (int)pad2.getWidth(), (int)pad2.getHeight());
-        win.fillRect((int)pad2.getX(),(int)pad2.getY(), (int)pad2.getWidth(), (int)pad2.getHeight());
-
-        //draw net
-        win.drawRect((int)(Breakout.getMaxWindowX()/2-5), 0, 10, (int)Breakout.getMaxWindowY());
-
-        //draw ball
-        win.setColor(ball.getColor());
-        win.drawOval((int)ball.getX(),(int)ball.getY(), (int)ball.getWidth(), (int)ball.getHeight());
-        win.fillOval((int)ball.getX(), (int)ball.getY(), 25, 25);
+    public static void drawGame(Graphics2D win, Brick[][] bricks, Brick[] pills, Paddle pad, Ball ball, Scoreboard score, String timer) {
+        for(Brick[] row:bricks){
+            for(Brick b: row){
+            b.draw(win);
+            }
+        }
+        for(Brick p: pills){
+            if(p!=null
+            ){
+                win.draw(p);
+                win.fill(p);
+            }
+        }
+        pad.draw(win);
+        ball.draw(win);
+        score.draw(win);
+        win.setFont(new Font("Courier", Font.PLAIN, 20));
+        win.drawString(timer, (int)(Breakout.getMaxWindowX()+40), (int)(Breakout.getMaxWindowY()-40));
     }
 
     public static void drawPauseScreen(Graphics2D win) {
         win.setColor(Color.white);
         win.setFont(new Font("TimesRoman", Font.PLAIN, 80));
-        win.drawString("Paused", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()-100));
+        win.drawString("Paused", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()/2)+60);
+        //options
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+        win.drawString("Resume (ENTER)", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()/2+150));
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+        win.drawString("Quit (Q)", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()/2+200));
     }
 
-    public static void drawPlayer1WinScreen(Graphics2D win){
+    public static void drawTransition(Graphics2D win, int level){
         win.setColor(Color.white);
         win.setFont(new Font("TimesRoman", Font.PLAIN, 80));
-        win.drawString("Player 1 Wins!", (int)(Breakout.getMaxWindowX()/4), (int)(Breakout.getMaxWindowY()/2));
+        win.drawString("Level cleared!", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()/2+60));
 
         win.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-        win.drawString("Press SPACE to play again!", (int)(Breakout.getMaxWindowX()/4), (int)(Breakout.getMaxWindowY())*3/4);
+        win.drawString("Press ENTER to continue into: LEVEL " + level, (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY())*3/4);
     }
 
-    public static void drawPlayer2WinScreen(Graphics2D win){
+    public static void drawWinScreen(Graphics2D win){
         win.setColor(Color.white);
         win.setFont(new Font("TimesRoman", Font.PLAIN, 80));
-        win.drawString("Player 2 Wins!", (int)(Breakout.getMaxWindowX()/4), (int)(Breakout.getMaxWindowY()/2));
+        win.drawString("You won!", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()/2+60));
 
         win.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-        win.drawString("Press SPACE to play again!", (int)(Breakout.getMaxWindowX()/4), (int)(Breakout.getMaxWindowY()*3/4));
+        win.drawString("Press SPACE to play again!", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()*3/4));
+    }
+
+    public static void drawLoseScreen(Graphics2D win){
+        win.setColor(Color.white);
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 80));
+        win.drawString("You lost :(", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()/2+60));
+
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+        win.drawString("Press SPACE to play again!", (int)(Breakout.getMaxWindowX()/9), (int)(Breakout.getMaxWindowY()*3/4));
     }
 }

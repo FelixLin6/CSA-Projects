@@ -12,6 +12,14 @@ public class Paddle extends Rectangle{
         this.width = width;
     }
 
+    public void setSpeed(int s){
+        this.movementSpeed = s;
+    }
+
+    public int getSpeed(){
+        return this.movementSpeed;
+    }
+    
     public void draw(Graphics2D pb){
         pb.setColor(Color.white);
         pb.fill(this);

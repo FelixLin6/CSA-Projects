@@ -11,12 +11,13 @@ public class DemoBrick extends Rectangle{
     public static int maxY = 254;
     private static int width = maxX/10;
     private static int height = width/4;
-    private static int cols = 5;
+    private static int cols = 7;
     private static int spacing = (maxX-cols*width)/(cols+1);
     private static int level = 4;
     private static int numBricks;
     public static int winX = 40;
     public static int winY = 350;
+    public boolean activationStatus = true;
 
     public DemoBrick(int x, int y, Color c){
         super(x, y, width, height);
@@ -51,12 +52,13 @@ public class DemoBrick extends Rectangle{
     public void pop(){
         this.col = Color.black;
         this.setSize(0, 0);
+        this.activationStatus = false;
     }
 
     public void draw(Graphics2D pb){
         pb.setColor(col);
-        pb.fill(this);
-        pb.draw(this);
+        pb.drawRect((int)this.getX(), (int)this.getY(), (int)this.getWidth(), (int)this.getHeight());
+        pb.fillRect((int)this.getX(), (int)this.getY(), (int)this.getWidth(), (int)this.getHeight());
     }
 
     public static DemoBrick[][] makeBricks(){
@@ -64,17 +66,15 @@ public class DemoBrick extends Rectangle{
         DemoBrick[][] bricks = new DemoBrick[2+level][cols];
         numBricks = bricks.length * bricks[0].length;
         int x = spacing + winX;
-        int y = winY;
-        System.out.println(x);
-        System.out.println(y);
+        int y = winY + 20;
         for(int i=0; i<bricks.length; i++){
             DemoBrick[] b = bricks[i];
             for(int j=0; j<b.length; j++){
                 b[j] = new DemoBrick(x, y, getPalette(i, palette));
                 x += (width + spacing);
             }
-            x=spacing;
-            y+=10;
+            x=spacing + winX;
+            y+=winY/20;
         }
         return bricks;
     }
