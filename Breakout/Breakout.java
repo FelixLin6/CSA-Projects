@@ -68,7 +68,7 @@ public class Breakout extends GDV5 {
         //Won
         else if(gameState==1 && this.level==10){gameState=4; score.resetScore();}
         //Lost
-        else if(gameState==1 && lost){gameState=5; score.resetScore(); lost = true;}
+        else if(gameState==1 && lost){gameState=5; score.resetScore(); lost = false;}
         //Cheat
         else if(gameState==1 && (Breakout.KeysPressed[KeyEvent.VK_P])){score.setScore(Brick.numBricks());}
         //Return to Cover
