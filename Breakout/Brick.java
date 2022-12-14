@@ -93,8 +93,8 @@ public class Brick extends Rectangle{
     public static Brick[] makePills(int x){
         Brick[] pills = new Brick[x];
         for(int i = 0; i < pills.length; i++){
-            pills[0] = new Brick(0,0,0,0);
-            pills[0].active = false;
+            pills[i] = new Brick(0,0,0,0);
+            pills[i].active = false;
         }
         return pills;
     }

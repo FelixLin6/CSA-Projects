@@ -62,7 +62,7 @@ public class Breakout extends GDV5 {
         //Resume
         else if(gameState==2 && (Breakout.KeysPressed[KeyEvent.VK_ENTER])){gameState=1;}
         //Transition
-        else if(gameState==1 && this.score.getScore()==Brick.numBricks()){gameState=3; this.level++; this.bricks = Brick.makeBricks(level); this.pills = Brick.makePills(Brick.numBricks());}
+        else if(gameState==1 && this.score.getScore()==Brick.numBricks()){gameState=3; this.level++; this.bricks = Brick.makeBricks(level); this.pills = Brick.makePills(Brick.numBricks());System.out.println("HERE");}
         //Continue to next level
         else if(gameState==3 && (Breakout.KeysPressed[KeyEvent.VK_ENTER])){gameState=1; score.resetScore();}
         //Won
