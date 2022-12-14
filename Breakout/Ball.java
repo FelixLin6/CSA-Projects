@@ -14,7 +14,6 @@ public class Ball extends Rectangle{
 	private Scoreboard score;
 	private Brick[] pills;
 	private int index = 0;
-	private boolean lost;
 
 	public Ball(int radius){
         super((int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()/2), radius*2, radius*2);
@@ -28,7 +27,6 @@ public class Ball extends Rectangle{
 		this.dy = speed;
 		this.score = score;
 		this.pills = pills;
-		this.lost = lost;
     }
     
 	public void setSpeed(int s){
