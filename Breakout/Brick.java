@@ -19,6 +19,8 @@ public class Brick extends Rectangle{
     private boolean active = true;
     public int powerup = (int)(Math.random()*4);
 
+    private 
+
     public Brick(int x, int y, Color c){
         super(x, y, width, height);
         col = c;
