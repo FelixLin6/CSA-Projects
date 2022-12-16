@@ -73,6 +73,7 @@ public class Breakout extends GDV5 {
             gameState=3; 
             this.level++; 
             this.bricks = Brick.makeBricks(level);
+            this.ball.setLocation((int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()/2));
         }
         //Continue to next level
         else if(gameState==3 && (Breakout.KeysPressed[KeyEvent.VK_ENTER])){
