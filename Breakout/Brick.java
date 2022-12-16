@@ -3,7 +3,6 @@ import utilities.GDV5;
 import java.awt.Rectangle;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.lang.Math;
 
 public class Brick extends Rectangle{
     private Color col;
@@ -17,17 +16,13 @@ public class Brick extends Rectangle{
     private static int level;
     private static int numBricks;
     private boolean active = true;
-    public int powerup = (int)(Math.random()*4);
+    private Pill pill;
 
-    private 
 
     public Brick(int x, int y, Color c){
         super(x, y, width, height);
         col = c;
-    }
-
-    public Brick(int x, int y, int w, int h){
-        super(x, y, w, h);
+        pill = new Pill((int)this.getCenterX(), (int)this.getCenterY(), width/3, height/3, this.col);
     }
 
     public static int height(){
@@ -64,14 +59,14 @@ public class Brick extends Rectangle{
         active = false;
     }
 
-    public void moveDown(){
-        this.setLocation((int)(this.getX()), (int)(this.getY()+6));
-    }
-
     public void draw(Graphics2D pb){
         pb.setColor(col);
         pb.fill(this);
         pb.draw(this);
+    }
+
+    public Pill getPill(){
+        return this.pill;
     }
 
     public static Brick[][] makeBricks(int level){
@@ -92,12 +87,17 @@ public class Brick extends Rectangle{
         return bricks;
     }
 
-    public static Brick[] makePills(int x){
-        Brick[] pills = new Brick[x];
-        for(int i = 0; i < pills.length; i++){
-            pills[i] = new Brick(0,0,0,0);
-            pills[i].active = false;
+    public void update(Paddle pad, Boolean poweredUp, Breakout runner){
+        if(pill.isActive()){
+            pill.moveDown();
+            if(pill.getY()>(int)Breakout.getMaxWindowY()){
+                pill.deactivate();
+            }
+            else if(pill.intersects(pad) && !poweredUp){
+                pill.deactivate();
+                runner.newPowerup(pill.powerup);
+                runner.enactPowerup(pill.powerup);
+            }
         }
-        return pills;
     }
 }

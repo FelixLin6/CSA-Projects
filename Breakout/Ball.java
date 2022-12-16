@@ -12,21 +12,18 @@ public class Ball extends Rectangle{
 	private double dy;
 	private Color col = Color.white;
 	private Scoreboard score;
-	private Brick[] pills;
-	private int index = 0;
 
 	public Ball(int radius){
         super((int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()/2), radius*2, radius*2);
         this.radius = radius;
     }
 
-    public Ball(int radius, int speed, Scoreboard score, Brick[] pills, boolean lost){
+    public Ball(int radius, int speed, Scoreboard score, boolean lost){
         super((int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()/2), radius*2, radius*2);
         this.radius = radius;
 		this.dx = speed;
 		this.dy = speed;
 		this.score = score;
-		this.pills = pills;
     }
     
 	public void setSpeed(int s){
@@ -65,9 +62,8 @@ public class Ball extends Rectangle{
 						dy = -dy;
 					}
 					brick.pop();
-					this.pills[index] = new Brick((int)brick.getCenterX(), (int)brick.getCenterY(), Brick.height/3, Brick.width/3);
+					brick.getPill().activate();
 					score.update();
-					index++;
 				}
 			}
 		}

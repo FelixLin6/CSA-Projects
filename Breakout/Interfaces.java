@@ -8,7 +8,7 @@ public class Interfaces {
     public static void drawCover(Graphics2D win, BreakoutDemo demo){
         win.setColor(Color.white);
         win.setFont(new Font("Courier", Font.PLAIN, Breakout.getMaxWindowX()*4/50));
-        win.drawString("BREAKOUT", (int)(Breakout.getMaxWindowX()/2-260), (int)(Breakout.getMaxWindowY()/3-50));
+        win.drawString("BREAKOUT", (int)(Breakout.getMaxWindowX()/2-260), (int)(Breakout.getMaxWindowY()/3-100));
 
         //draw grid
         win.drawLine((int)(Breakout.getMaxWindowX()/2), 0, (int)(Breakout.getMaxWindowX()/2), (int)(Breakout.getMaxWindowY()));
@@ -20,14 +20,17 @@ public class Interfaces {
 
         //draw win condition
         win.setFont(new Font("Courier", Font.PLAIN, 20));
-        win.drawString("Shoot down all the bricks in each level to win...", (int)(demo.getWinX()), (int)(demo.getWinY()-70));
-        win.drawString("The # of layers increases as the level increases...", (int)(demo.getWinX()), (int)(demo.getWinY()-40));
-        win.drawString("Lose if you miss the ball's rebound!", (int)(demo.getWinX()), (int)(demo.getWinY()-10));
+        win.drawString("Shoot down all the bricks in each level to win", (int)(demo.getWinX()), (int)(demo.getWinY()-110));
+        win.drawString("The # of layers increases as the level increases", (int)(demo.getWinX()), (int)(demo.getWinY()-80));
+        win.drawString("Take pills to recieve 5-second powerups", (int)(demo.getWinX()), (int)(demo.getWinY()-50));
+        win.drawString("Lose if you miss the ball's rebound!", (int)(demo.getWinX()), (int)(demo.getWinY()-20));
 
          //draw controls
-         win.drawString("Paddle controls: ←, →", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(Breakout.getMaxWindowY()/2-80));
-         win.drawString("Ball controls (when using the ability)", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(Breakout.getMaxWindowY()/2));
-         win.drawString("[Telekinesis]: W, A, S, D", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(Breakout.getMaxWindowY()/2+40));
+         win.drawString("Paddle controls: ←, →", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(demo.getWinY()-110));
+         win.drawString("Three powerups:", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(demo.getWinY()-50));
+         win.drawString("[Telekinesis] Controls: W, A, S, D", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(demo.getWinY()-20));
+         win.drawString("[Speed up your paddle]", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(demo.getWinY()+10));
+         win.drawString("[Speed down the ball]", (int)(Breakout.getMaxWindowX()*0.5+100), (int)(demo.getWinY()+40));
          
 
         //draw demo 
@@ -47,17 +50,13 @@ public class Interfaces {
         win.drawString("Press ENTER to start", (int)(Breakout.getMaxWindowX()/2-140), (int)(Breakout.getMaxWindowY()/2));
     }
 
-    public static void drawGame(Graphics2D win, Brick[][] bricks, Brick[] pills, Paddle pad, Ball ball, Scoreboard score, String timer) {
+    public static void drawGame(Graphics2D win, Brick[][] bricks, Paddle pad, Ball ball, Scoreboard score, String timer) {
         for(Brick[] row:bricks){
             for(Brick b: row){
-            b.draw(win);
-            }
-        }
-        for(Brick p: pills){
-            if(p!=null
-            ){
-                win.draw(p);
-                win.fill(p);
+                b.draw(win);
+                if(b.getPill().isActive()){
+                    b.getPill().draw(win);
+                }
             }
         }
         pad.draw(win);
