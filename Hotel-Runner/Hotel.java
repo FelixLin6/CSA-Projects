@@ -41,8 +41,8 @@ public class Hotel {
     }
 
     public double getOccupancyRate(){
-        double rate = this.getNumberOccupied()/this.totalRooms;
-        double rounded = Math.round((rate*100.0)/100.0);
+        double rate = (double)this.getNumberOccupied()/this.totalRooms;
+        double rounded = Math.round(rate*100.0)/100.0;
         return rounded;
     }
 
@@ -69,7 +69,7 @@ public class Hotel {
     }
 
     public String toString(){
-        return this.hotelName + ": " + this.getOccupancyRate()*100 + "% occupied";
+        return "The " + this.hotelName + ": " + (int)(this.getOccupancyRate()*100) + "% occupied";
     }
 
     public void printRooms(){
