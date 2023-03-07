@@ -11,12 +11,20 @@ public class Tile extends Rectangle{
     private int direction;
     private Color color;
     private int dimension = 20;
+    private boolean apple = false;
     
 
     public Tile(int x, int y){
         super(x, y, 0, 0);
         this.setSize(dimension, dimension);
         color = Color.white;
+    }
+
+    public Tile(int x, int y, boolean True){
+        super(x, y, 0, 0);
+        this.setSize(dimension, dimension);
+        color = Color.red;
+        this.apple = True;
     }
 
     public Tile(int x, int y, Color color, int row, int col){
@@ -105,6 +113,8 @@ public class Tile extends Rectangle{
     public void setCol(int col) {
         this.col = col;
     }
-    
 
+    public boolean isApple() {
+        return this.apple;
+    }
 }

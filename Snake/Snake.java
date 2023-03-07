@@ -15,7 +15,7 @@ public class Snake{
         int row = 20;
         int col = 30;
         for(int i = 0; i < 5; i++){
-            body.add(new Tile(x, y, Color.blue, row, col));
+            body.add(new Tile(x, y, Color.green, row, col));
             x += body.get(0).getDimension();
             col++;
         }
@@ -26,14 +26,45 @@ public class Snake{
         
     }
 
+    public void action(){
+        Tile head = body.get(0);
+        for(int i = 1; i < body.size(); i++){
+            if(head.intersects(body.get(i))){
+                Game.lost();
+            }
+        } 
+        if(Board.board[head.getRow()][head.getCol()].isApple()){
+            Scoreboard.update();
+            addBody();
+            Game.upLevel();
+            Board.newApple(head.getRow(), head.getCol());
+        }
+    }
+
     public void headSetDirection(){
         Tile head = body.get(0);
         int row = head.getRow();
         int col = head.getCol();
-        if(Game.KeysPressed[KeyEvent.VK_UP]) head.setDirection(1);
-        if(Game.KeysPressed[KeyEvent.VK_DOWN]) head.setDirection(3);
-        if(Game.KeysPressed[KeyEvent.VK_RIGHT]) head.setDirection(0);
-        if(Game.KeysPressed[KeyEvent.VK_LEFT]) head.setDirection(2); 
+        if(Game.KeysPressed[KeyEvent.VK_UP]){
+            if(head.getDirection()!=3){
+                head.setDirection(1);
+            }
+        }
+        if(Game.KeysPressed[KeyEvent.VK_DOWN]){
+            if(head.getDirection()!=1){
+                head.setDirection(3);
+            }
+        }
+        if(Game.KeysPressed[KeyEvent.VK_RIGHT]){
+            if(head.getDirection()!=2){
+                head.setDirection(0);
+            } 
+        }
+        if(Game.KeysPressed[KeyEvent.VK_LEFT]){
+            if(head.getDirection()!=0){
+                head.setDirection(2); 
+            } 
+        }
         Board.board[row][col].setDirection(head.getDirection());
     }
 
@@ -75,9 +106,6 @@ public class Snake{
             y-=(int)tail.getHeight();
             body.add(new Tile(x,y,color,row,col));
         }
-        
-
-
     }
     public void draw(Graphics2D pb){
         for(Tile t: body){
