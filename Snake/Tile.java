@@ -17,7 +17,7 @@ public class Tile extends Rectangle{
     public Tile(int x, int y){
         super(x, y, 0, 0);
         this.setSize(dimension, dimension);
-        color = Color.white;
+        color = new Color(44, 122, 81);
     }
 
     public Tile(int x, int y, boolean True){

@@ -9,24 +9,24 @@ public class Interfaces {
     public static void drawCover(Graphics2D win){
         win.setColor(Color.white);
         win.setFont(new Font("Courier", Font.ITALIC, Game.getMaxWindowX()*4/50));
-        win.drawString("Snake", (int)(Game.getMaxWindowX()/2-150), (int)(Game.getMaxWindowY()/3-100));
+        win.drawString("Snake", (int)(Game.getMaxWindowX()/2-75), (int)(Game.getMaxWindowY()/3-100));
 
         //draw grid
-        win.drawLine((int)(Game.getMaxWindowX()/2), 0, (int)(Game.getMaxWindowX()/2), (int)(Game.getMaxWindowY()));
-        win.drawLine(0, (int)(Game.getMaxWindowY()/2), (int)(Game.getMaxWindowX()), (int)(Game.getMaxWindowY()/2));
+        // win.drawLine((int)(Game.getMaxWindowX()/2), 0, (int)(Game.getMaxWindowX()/2), (int)(Game.getMaxWindowY()));
+        // win.drawLine(0, (int)(Game.getMaxWindowY()/2), (int)(Game.getMaxWindowX()), (int)(Game.getMaxWindowY()/2));
 
         win.setFont(new Font("Courier", Font.PLAIN, 30));
-        win.drawString("Press ENTER to start", (int)(Game.getMaxWindowX()/2-152), (int)(Game.getMaxWindowY()*3/4));
+        win.drawString("Press ENTER to start", (int)(Game.getMaxWindowX()/2-150), (int)(Game.getMaxWindowY()*3/4));
         
 
         //draw win condition
         win.setFont(new Font("Courier", Font.PLAIN, 20));
-        win.drawString("Eat as many apples as you can before it bumps into itself or the walls!", (int)(GDV5.getMaxWindowX())/4, (int)(GDV5.getMaxWindowY())/2-40);
-        win.drawString("The speediness of your snake increases as you eat more apples", (int)(GDV5.getMaxWindowX())/4+25, (int)(GDV5.getMaxWindowY())/2);
+        win.drawString("Eat as many apples as you can before it bumps into itself or the wall", (int)(GDV5.getMaxWindowX())-(int)(GDV5.getMaxWindowX())+3, (int)(GDV5.getMaxWindowY())/2-40);
+        win.drawString("The speediness of your snake increases as you eat more apples", (int)(GDV5.getMaxWindowX())-(int)(GDV5.getMaxWindowX())+22, (int)(GDV5.getMaxWindowY())/2);
 
 
         //  //draw controls
-         win.drawString("Control your snake with: ↑, ↓, ←, →", (int)(GDV5.getMaxWindowX())/2-160, (int)(GDV5.getMaxWindowY())/2+40);
+         win.drawString("Control your snake with: ↑, ↓, ←, →", (int)(GDV5.getMaxWindowX())/2-155, (int)(GDV5.getMaxWindowY())/2+40);
     }
 
     public static void drawCover1(Graphics2D win){
@@ -58,7 +58,7 @@ public class Interfaces {
         win.setFont(new Font("TimesRoman", Font.PLAIN, 80));
         win.drawString("Score: " + Scoreboard.getScore(), (int)(Game.getMaxWindowX()/9), (int)(Game.getMaxWindowY()/2+60));
 
-        win.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+        win.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         win.drawString("Press SPACE to play again!", (int)(Game.getMaxWindowX()/9), (int)(Game.getMaxWindowY()*3/4));
     }
 }

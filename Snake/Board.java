@@ -10,7 +10,7 @@ public class Board {
 
     public static void makeBoard(){
         rows = 40;
-        cols = 60;
+        cols = 30;
         board = new Tile[rows][cols];
         for(int i = 0; i < rows; i ++){
             for(int j = 0; j < cols; j ++){
@@ -29,13 +29,16 @@ public class Board {
         board[r][c] = new Tile(x, y, true);
     }
 
-    public static void drawBoard(Graphics2D pb){
+    public static void drawBoard(Graphics2D pb, Images images, Game game){
+        int width = 20, height = 20;
         for(Tile[] row: board){
             for(Tile t: row){
                 if(t.isApple()){
+                    pb.drawImage(images.apple1, (int)t.getX()-(width/2-10), (int)t.getY()-(height/2-10), width, height, game);
+                }
+                else{
                     t.fill(pb);
                 }
-                // t.draw(pb);
             }
         }
     }

@@ -9,7 +9,6 @@ import java.io.IOException;
 import javax.sound.sampled.*;
 
 
-
 public class Breakout extends GDV5 {
 
     private int level = 1;

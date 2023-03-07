@@ -7,22 +7,26 @@ import java.awt.Color;
 
 public class Snake{
     ArrayList<Tile> body;
+    Game game;
+    Images images;
 
-    public Snake(){
+    public Snake(Game game, Images images){
+        this.game = game;
+        this.images = images;
         body = new ArrayList<Tile>();
-        int x = 600;
+        int x = 300;
         int y = 400;
         int row = 20;
-        int col = 30;
+        int col = 15;
         for(int i = 0; i < 5; i++){
             body.add(new Tile(x, y, Color.green, row, col));
             x += body.get(0).getDimension();
             col++;
         }
-        Board.board[row][31].setDirection(2);
-        Board.board[row][32].setDirection(2);
-        Board.board[row][33].setDirection(2);
-        Board.board[row][34].setDirection(2);
+        Board.board[row][16].setDirection(2);
+        Board.board[row][17].setDirection(2);
+        Board.board[row][18].setDirection(2);
+        Board.board[row][19].setDirection(2);
         
     }
 
@@ -108,9 +112,52 @@ public class Snake{
         }
     }
     public void draw(Graphics2D pb){
-        for(Tile t: body){
-            pb.setColor(t.getColor());
-            t.fill(pb);
+        for(int i = 0; i < body.size(); i++){
+            Tile p = body.get(i);
+            int width = 60, height = 60;
+            if(i==0){
+                if(p.getDirection()==0){
+                    pb.drawImage(images.headRight, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+                else if(p.getDirection()==1){
+                    pb.drawImage(images.headUp, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+                else if(p.getDirection()==2){
+                    pb.drawImage(images.headLeft, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+                else if(p.getDirection()==3){
+                    pb.drawImage(images.headDown, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+                
+            }
+            else if(i==body.size()-1){
+                if(p.getDirection()==0){
+                    pb.drawImage(images.tailRight, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+                else if(p.getDirection()==1){
+                    pb.drawImage(images.tailUp, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                }
+                else if(p.getDirection()==2){
+                    pb.drawImage(images.tailLeft, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                }
+                else if(p.getDirection()==3){
+                    pb.drawImage(images.tailDown, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                }
+            }
+            else{
+                if(p.getDirection()==0){
+                    pb.drawImage(images.bodyVertical, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+                else if(p.getDirection()==1){
+                    pb.drawImage(images.bodyHorizontal, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+                else if(p.getDirection()==2){
+                    pb.drawImage(images.bodyVertical, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+                else if(p.getDirection()==3){
+                    pb.drawImage(images.bodyHorizontal, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                }
+            }
         }
     }
 

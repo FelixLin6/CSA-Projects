@@ -34,6 +34,6 @@ public class Scoreboard {
     public void draw(Graphics2D pb){
         pb.setFont(new Font("Courier", Font.PLAIN, this.size));
         pb.setColor(Color.white);
-        pb.drawString(getScoreStr(), (int)(Game.getMaxWindowX()/2-(this.size*1/2)), (int)(Game.getMaxWindowY()/2));
+        pb.drawString(getScoreStr(), (int)(Game.getMaxWindowX()/2-(this.size*1/2)+25), (int)(Game.getMaxWindowY()/2));
     }
 }
