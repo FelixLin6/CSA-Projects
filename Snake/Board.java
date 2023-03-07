@@ -29,6 +29,16 @@ public class Board {
         board[r][c] = new Tile(x, y, true);
     }
 
+    public static void newPill(int row, int col){
+        int x = (int)board[row][col].getX(), y = (int)board[row][col].getY();
+        board[row][col] = new Tile(x, y);
+        int r = (int)(Math.random()*rows);
+        int c = (int)(Math.random()*cols);
+        x = (int)board[r][c].getX();
+        y = (int)board[r][c].getY();
+        board[r][c] = new Tile(x, y, true);
+    }
+
     public static void drawBoard(Graphics2D pb, Images images, Game game){
         int width = 20, height = 20;
         for(Tile[] row: board){

@@ -40,6 +40,7 @@ public class Snake{
         if(Board.board[head.getRow()][head.getCol()].isApple()){
             Scoreboard.update();
             addBody();
+            Game.s1.play(0);
             Game.upLevel();
             Board.newApple(head.getRow(), head.getCol());
         }

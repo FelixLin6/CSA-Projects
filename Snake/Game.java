@@ -8,27 +8,29 @@ import java.lang.Math;
 public class Game extends GDV5{
 
     private int count = 0;
-    private int songCount = 0;
     private Scoreboard score = new Scoreboard(100);
     private int gameState = 0;
     private static boolean lost = false;
     private static int index = 0;
     private static int[] dividends = {10, 5, 3};
-    Images images = new Images();
+    private Images images = new Images();
     private Snake s = new Snake(this, images);
-    static SoundDriverHo s1;
+    public static SoundDriverHo s1;
+
+
+    public Game(){
+        String[] filenames = new String[]{"pongNoise.wav"};
+        // filenames[0] = "pongNoise.wav";
+        // filenames[1] = "utilities/8_bit_bgm.mp3";
+        s1 = new SoundDriverHo(filenames, this);
+        s1.play(0);
+    }
 
     public static void main(String[] args){
-        String[] filenames = new String[2];
-        filenames[0] = "apple_crunch.wav";
-        filenames[1] = "8_bit_bgm.mp3";
-
         Board.makeBoard();
         Board.newApple((int)Math.random()*Board.rows, (int)Math.random()*Board.cols);
         Game g = new Game();
-        s1 = new SoundDriverHo(filenames, g);
         g.start();
-        s1.play(1);
     }
 
     public static void lost(){
@@ -81,7 +83,6 @@ public class Game extends GDV5{
         checkGameState();
         if(gameState==1){
             count ++;
-            
             s.action();
             s.headSetDirection();
             if(count%dividends[index]==0){
@@ -93,10 +94,6 @@ public class Game extends GDV5{
                     lost();
                 }
             }
-            // if(this.songCount%3900==0){
-            //     s1.play(0);
-            // }
-            songCount++;
         }
     }
 
