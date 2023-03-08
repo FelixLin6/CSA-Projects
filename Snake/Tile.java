@@ -12,6 +12,8 @@ public class Tile extends Rectangle{
     private Color color;
     private int dimension = 20;
     private boolean apple = false;
+    private boolean pill = false;
+    private boolean bomb = false;
     
 
     public Tile(int x, int y){
@@ -23,9 +25,24 @@ public class Tile extends Rectangle{
     public Tile(int x, int y, boolean True){
         super(x, y, 0, 0);
         this.setSize(dimension, dimension);
-        color = Color.red;
-        this.apple = True;
+        color = new Color(44, 122, 81);
+        this.apple = true;
     }
+
+    public Tile(int x, int y, String isPill){
+        super(x, y, 0, 0);
+        this.setSize(dimension, dimension);
+        color = new Color(44, 122, 81);
+        this.pill = true;
+    }
+
+    public Tile(int x, int y, int isBomb){
+        super(x, y, 0, 0);
+        this.setSize(dimension, dimension);
+        color = new Color(44, 122, 81);
+        this.bomb = true;
+    }
+
 
     public Tile(int x, int y, Color color, int row, int col){
         super(x, y, 0, 0);
@@ -73,7 +90,6 @@ public class Tile extends Rectangle{
         }
     }
 
-
     public int getDirection() {
         return this.direction;
     }
@@ -117,4 +133,37 @@ public class Tile extends Rectangle{
     public boolean isApple() {
         return this.apple;
     }
+
+    public boolean isPill() {
+        return this.pill;
+    }
+
+    public boolean getApple() {
+        return this.apple;
+    }
+
+    public void setApple(boolean apple) {
+        this.apple = apple;
+    }
+
+    public boolean getPill() {
+        return this.pill;
+    }
+
+    public void setPill(boolean pill) {
+        this.pill = pill;
+    }
+
+    public boolean isBomb() {
+        return this.bomb;
+    }
+
+    public boolean getBomb() {
+        return this.bomb;
+    }
+
+    public void setBomb(boolean bomb) {
+        this.bomb = bomb;
+    }
+
 }

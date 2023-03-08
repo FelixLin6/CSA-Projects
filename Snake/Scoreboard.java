@@ -19,6 +19,10 @@ public class Scoreboard {
         this.size = s;
     }
 
+    public static void addFive(){
+        score+=5;
+    }
+
     public static int getScore(){
         return score;
     }

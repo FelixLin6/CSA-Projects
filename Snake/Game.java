@@ -16,43 +16,79 @@ public class Game extends GDV5{
     private Images images = new Images();
     private Snake s = new Snake(this, images);
     public static SoundDriverHo s1;
+    private static boolean shine = false;
+    private static int shineCount = 0;
+    private static boolean shineStatus = false;
 
 
     public Game(){
-        String[] filenames = new String[]{"pongNoise.wav"};
-        // filenames[0] = "pongNoise.wav";
-        // filenames[1] = "utilities/8_bit_bgm.mp3";
+        String[] filenames = new String[4];
+        filenames[0] = "8_bit_adventure_70%.wav";
+        filenames[1] = "apple_crunch_165%.wav";
+        filenames[2] = "powerup1.wav";
+        filenames[3] = "boom.wav";
         s1 = new SoundDriverHo(filenames, this);
-        s1.play(0);
     }
 
     public static void main(String[] args){
         Board.makeBoard();
-        Board.newApple((int)Math.random()*Board.rows, (int)Math.random()*Board.cols);
         Game g = new Game();
+        s1.loop(0);
         g.start();
     }
 
     public static void lost(){
         Game.lost = true;
     }
+
+    public static void reduceIndex(){
+        index--;
+    }
+
+    public static boolean getShineStatus(){
+        return shineStatus;
+    }
+
+    public static void setShine(boolean bool){
+        shine = bool;
+    }
     
     public static void upLevel(){
-        if(index < dividends.length-1 && Scoreboard.getScore()!=0 && Scoreboard.getScore()%10==0){
+        if(index < dividends.length-1 && Scoreboard.getScore()!=0 && Scoreboard.getScore()%5==0){
             index++;
             System.out.println("Level up");
         }
     }
 
+    public static void checkShine(){
+        if(shine){
+            if(shineCount%30==0){
+                if(shineStatus){
+                    shineStatus=false;
+                }
+                else{
+                    shineStatus=true;
+                }
+            }
+            shineCount++;
+            if(shineCount==180){
+                shineCount=0;
+                shineStatus=false;
+                shine=false;
+            }
+        }
+    }
 
     public void checkGameState(){
         //Game states: 0 == Home, 1 == Game, 2 == Pause, 3 == Ending screen
         //Start game
         if(gameState==0 && (Game.KeysPressed[KeyEvent.VK_ENTER])){
+            Board.makeBoard();
             s = new Snake(this, images);
             score.resetScore(); 
             count = 0;
             gameState=1;
+            Board.newApple((int)Math.random()*Board.rows, (int)Math.random()*Board.cols);
             index = 0;
         }
         //Pause
@@ -82,9 +118,10 @@ public class Game extends GDV5{
     public void update(){
         checkGameState();
         if(gameState==1){
-            count ++;
+            count++;
             s.action();
             s.headSetDirection();
+            checkShine();
             if(count%dividends[index]==0){
                 s.bodyGetDirection();
                 try{

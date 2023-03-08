@@ -23,10 +23,11 @@ public class Interfaces {
         win.setFont(new Font("Courier", Font.PLAIN, 20));
         win.drawString("Eat as many apples as you can before it bumps into itself or the wall", (int)(GDV5.getMaxWindowX())-(int)(GDV5.getMaxWindowX())+3, (int)(GDV5.getMaxWindowY())/2-40);
         win.drawString("The speediness of your snake increases as you eat more apples", (int)(GDV5.getMaxWindowX())-(int)(GDV5.getMaxWindowX())+22, (int)(GDV5.getMaxWindowY())/2);
-
+        win.drawString("Eat PILLS to slow down your snake", (int)(GDV5.getMaxWindowX())/4-5, (int)(GDV5.getMaxWindowY())/2+40);
+        win.drawString("Don't run into the bombs!", (int)(GDV5.getMaxWindowX())/3-10, (int)(GDV5.getMaxWindowY())/2+80);
 
         //  //draw controls
-         win.drawString("Control your snake with: ↑, ↓, ←, →", (int)(GDV5.getMaxWindowX())/2-155, (int)(GDV5.getMaxWindowY())/2+40);
+         win.drawString("Control your snake with: ↑, ↓, ←, →", (int)(GDV5.getMaxWindowX())/2-150, (int)(GDV5.getMaxWindowY())/2+120);
     }
 
     public static void drawCover1(Graphics2D win){

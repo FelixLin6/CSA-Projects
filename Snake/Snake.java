@@ -39,10 +39,30 @@ public class Snake{
         } 
         if(Board.board[head.getRow()][head.getCol()].isApple()){
             Scoreboard.update();
+            if(Scoreboard.getScore()!=0 && Scoreboard.getScore()%5==0){
+                Board.newBomb((int)Math.random()*Board.rows, (int)Math.random()*Board.cols);
+            }
+            if(Scoreboard.getScore()!=0 && Scoreboard.getScore()%10==0){
+                Board.newPill((int)Math.random()*Board.rows, (int)Math.random()*Board.cols);
+            }
             addBody();
-            Game.s1.play(0);
+            Game.s1.play(1);
             Game.upLevel();
             Board.newApple(head.getRow(), head.getCol());
+        }
+        else if(Board.board[head.getRow()][head.getCol()].isPill()){
+            Game.setShine(true);
+            Game.reduceIndex();
+            Tile t = Board.board[head.getRow()][head.getCol()];
+            int x = (int)t.getX(), y = (int)t.getY();
+            Board.board[head.getRow()][head.getCol()] = new Tile(x, y);
+            Game.s1.play(2);
+
+        }
+        else if(Board.board[head.getRow()][head.getCol()].isBomb()){
+            Game.lost();
+            Game.s1.play(3);
+
         }
     }
 
@@ -117,46 +137,93 @@ public class Snake{
             Tile p = body.get(i);
             int width = 60, height = 60;
             if(i==0){
-                if(p.getDirection()==0){
-                    pb.drawImage(images.headRight, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                if(Game.getShineStatus()){
+                    if(p.getDirection()==0){
+                        pb.drawImage(images.gHeadRight, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==1){
+                        pb.drawImage(images.gHeadUp, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==2){
+                        pb.drawImage(images.gHeadLeft, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==3){
+                        pb.drawImage(images.gHeadDown, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
                 }
-                else if(p.getDirection()==1){
-                    pb.drawImage(images.headUp, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                else{
+                    if(p.getDirection()==0){
+                        pb.drawImage(images.headRight, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==1){
+                        pb.drawImage(images.headUp, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==2){
+                        pb.drawImage(images.headLeft, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==3){
+                        pb.drawImage(images.headDown, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
                 }
-                else if(p.getDirection()==2){
-                    pb.drawImage(images.headLeft, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
-                }
-                else if(p.getDirection()==3){
-                    pb.drawImage(images.headDown, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
-                }
-                
             }
             else if(i==body.size()-1){
-                if(p.getDirection()==0){
-                    pb.drawImage(images.tailRight, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                if(Game.getShineStatus()){
+                    if(p.getDirection()==0){
+                        pb.drawImage(images.gTailRight, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==1){
+                        pb.drawImage(images.gTailUp, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==2){
+                        pb.drawImage(images.gTailLeft, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==3){
+                        pb.drawImage(images.gTailDown, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                    }
                 }
-                else if(p.getDirection()==1){
-                    pb.drawImage(images.tailUp, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
-                }
-                else if(p.getDirection()==2){
-                    pb.drawImage(images.tailLeft, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
-                }
-                else if(p.getDirection()==3){
-                    pb.drawImage(images.tailDown, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                else{
+                    if(p.getDirection()==0){
+                        pb.drawImage(images.tailRight, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==1){
+                        pb.drawImage(images.tailUp, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==2){
+                        pb.drawImage(images.tailLeft, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==3){
+                        pb.drawImage(images.tailDown, (int)p.getX()-(width/2-10), (int)p.getY()-(width/2-10), width, height, game);
+                    }
                 }
             }
             else{
-                if(p.getDirection()==0){
-                    pb.drawImage(images.bodyVertical, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                if(Game.getShineStatus()){
+                    if(p.getDirection()==0){
+                        pb.drawImage(images.gBodyHorizontal, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==1){
+                        pb.drawImage(images.gBodyVertical, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==2){
+                        pb.drawImage(images.gBodyHorizontal, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==3){
+                        pb.drawImage(images.gBodyVertical, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
                 }
-                else if(p.getDirection()==1){
-                    pb.drawImage(images.bodyHorizontal, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
-                }
-                else if(p.getDirection()==2){
-                    pb.drawImage(images.bodyVertical, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
-                }
-                else if(p.getDirection()==3){
-                    pb.drawImage(images.bodyHorizontal, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                else {
+                    if(p.getDirection()==0){
+                        pb.drawImage(images.bodyVertical, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==1){
+                        pb.drawImage(images.bodyHorizontal, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==2){
+                        pb.drawImage(images.bodyVertical, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
+                    else if(p.getDirection()==3){
+                        pb.drawImage(images.bodyHorizontal, (int)p.getX()-(width/2-10), (int)p.getY()-(height/2-10), width, height, game);
+                    }
                 }
             }
         }

@@ -19,11 +19,41 @@ public class Images {
         }
     }
 
+    BufferedImage pill; {
+        try {
+            File file = new File("images/pill.png");
+            FileInputStream fis = new FileInputStream(file);
+            pill = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
+    BufferedImage mine; {
+        try {
+            File file = new File("images/mine.png");
+            FileInputStream fis = new FileInputStream(file);
+            mine = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
     BufferedImage headRight; {
         try {
             File file = new File("images/headRight.png");
             FileInputStream fis = new FileInputStream(file);
             headRight = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
+    BufferedImage gHeadRight; {
+        try {
+            File file = new File("images/gHeadRight.png");
+            FileInputStream fis = new FileInputStream(file);
+            gHeadRight = ImageIO.read(fis);
         }   catch(IOException e){
             System.err.println(e);
         }
@@ -39,11 +69,31 @@ public class Images {
         }
     }
 
+    BufferedImage gHeadLeft; {
+        try {
+            File file = new File("images/gHeadRight.png");
+            FileInputStream fis = new FileInputStream(file);
+            gHeadRight = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
     BufferedImage headUp; {
         try {
             File file = new File("images/headUp.png");
             FileInputStream fis = new FileInputStream(file);
             headUp = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
+    BufferedImage gHeadUp; {
+        try {
+            File file = new File("images/gHeadUp.png");
+            FileInputStream fis = new FileInputStream(file);
+            gHeadUp = ImageIO.read(fis);
         }   catch(IOException e){
             System.err.println(e);
         }
@@ -59,11 +109,32 @@ public class Images {
         }
     }
 
+    BufferedImage gHeadDown; {
+        try {
+            File file = new File("images/gHeadDown.png");
+            FileInputStream fis = new FileInputStream(file);
+            gHeadDown = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
+
     BufferedImage bodyHorizontal; {
         try {
             File file = new File("images/bodyHorizontal.png");
             FileInputStream fis = new FileInputStream(file);
             bodyHorizontal = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
+    BufferedImage gBodyHorizontal; {
+        try {
+            File file = new File("images/gBodyHorizontal.png");
+            FileInputStream fis = new FileInputStream(file);
+            gBodyHorizontal = ImageIO.read(fis);
         }   catch(IOException e){
             System.err.println(e);
         }
@@ -79,6 +150,16 @@ public class Images {
         }
     }
 
+    BufferedImage gBodyVertical; {
+        try {
+            File file = new File("images/gBodyVertical.png");
+            FileInputStream fis = new FileInputStream(file);
+            gBodyVertical = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
     BufferedImage tailUp; {
         try {
             File file = new File("images/tailUp.png");
@@ -89,12 +170,31 @@ public class Images {
         }
     }
 
+    BufferedImage gTailUp; {
+        try {
+            File file = new File("images/gTailUp.png");
+            FileInputStream fis = new FileInputStream(file);
+            gTailUp = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
 
     BufferedImage tailDown; {
         try {
             File file = new File("images/tailDown.png");
             FileInputStream fis = new FileInputStream(file);
             tailDown = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
+    BufferedImage gTailDown; {
+        try {
+            File file = new File("images/gTailDown.png");
+            FileInputStream fis = new FileInputStream(file);
+            gTailDown = ImageIO.read(fis);
         }   catch(IOException e){
             System.err.println(e);
         }
@@ -110,6 +210,16 @@ public class Images {
         }
     }
 
+    BufferedImage gTailRight; {
+        try {
+            File file = new File("images/gTailRight.png");
+            FileInputStream fis = new FileInputStream(file);
+            gTailRight = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
+
     BufferedImage tailLeft; {
         try {
             File file = new File("images/tailLeft.png");
@@ -120,5 +230,14 @@ public class Images {
         }
     }
 
+    BufferedImage gTailLeft; {
+        try {
+            File file = new File("images/gTailLeft.png");
+            FileInputStream fis = new FileInputStream(file);
+            gTailLeft = ImageIO.read(fis);
+        }   catch(IOException e){
+            System.err.println(e);
+        }
+    }
 
 }
