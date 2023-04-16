@@ -1,6 +1,5 @@
 package Battleship;
 
-import java.util.Arrays;
 
 public abstract class Boat {
     private int team;
@@ -30,32 +29,32 @@ public abstract class Boat {
         return location;
     }
 
-    public String getDirection() {
+    public char getDirection() {
         if(dir==World.NORTH){
-            return "↑";
+            return '\u2191';
         }
         else if(dir==World.NORTHEAST){
-            return "↗";
+            return '\u2197';
         }
         else if(dir==World.EAST){
-            return "→";
+            return '\u2192';
         }
         else if(dir==World.SOUTHEAST){
-            return "↘";
+            return '\u2198';
         }
         else if(dir==World.SOUTH){
-            return "↓";
+            return '\u2193';
         }
         else if(dir==World.SOUTHWEST){
-            return "↙";
+            return '\u2199';
         }
         else if(dir==World.WEST){
-            return "←";
+            return '\u2190';
         }
         else if(dir==World.NORTHWEST){
-            return "↖";
+            return '\u2196';
         }
-        return "";
+        return ' ';
     }
 
     public int getHealth() {
@@ -125,8 +124,22 @@ public abstract class Boat {
     }
 
     public String turn(int direction) {
-        this.dir = (this.dir + direction + 4) % 4;
-        return id + " turned " + (direction == -1 ? "left, now facing " : "right, now facing ") + getDirection() + ".";
+        if(dir == 0 && direction == -1) direction = 7;
+        else if(dir == 7 && direction == 1) direction = 0;
+        else dir += direction;
+        String action;
+        if(direction == 1) action = "right";
+        else action = "left";
+        String facing = "";
+        if(direction == 0) facing = "N";
+        if(direction == 1) facing = "NE";
+        if(direction == 2) facing = "E";
+        if(direction == 3) facing = "SE";
+        if(direction == 4) facing = "S";
+        if(direction == 0) facing = "SW";
+        if(direction == 6) facing = "W";
+        if(direction == 7) facing = "NW";
+        return getID() + " turned " + action + ", now facing " + facing;
     }
 
     public String takeHit(int strength) {
