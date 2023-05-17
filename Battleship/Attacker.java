@@ -1,5 +1,5 @@
 package Battleship;
 
-public abstract class Attacker {
-    public abstract String attack();
+public abstract interface Attacker {
+    public abstract String attack(World world);
 }

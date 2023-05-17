@@ -1,5 +1,6 @@
 package Battleship;
 
+import java.util.ArrayList;
 
 public abstract class Boat {
     private int team;
@@ -154,6 +155,45 @@ public abstract class Boat {
 
     public void setLocation(Coordinates location) {
         this.location = location;
+    }
+
+    public Boat findTarget(World world) {
+        int x = getLocation().getX();
+        int y = getLocation().getY();
+        int vision = getVision();
+
+        for (int i = -vision; i <= vision; i++) {
+            int targetX = x + i;
+            int targetY = y + i;
+            Coordinates loc = new Coordinates(targetX, targetY);
+            if (world.isLocationValid(loc)) {
+                Boat target = world.getOccupant(loc);
+                if (target != null && target.getTeam() != getTeam()) {
+                    return target;
+                }
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Boat> findTargets(World world) {
+        ArrayList<Boat> targets = new ArrayList<Boat>();
+        int x = getLocation().getX();
+        int y = getLocation().getY();
+        int vision = getVision();
+
+        for (int i = -vision; i <= vision; i++) {
+            int targetX = x + i;
+            int targetY = y + i;
+            Coordinates loc = new Coordinates(targetX, targetY);
+            if (world.isLocationValid(loc)) {
+                Boat target = world.getOccupant(loc);
+                if (target != null && target.getTeam() != getTeam()) {
+                    targets.add(target);
+                }
+            }
+        }
+        return targets;
     }
 
     @Override
