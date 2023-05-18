@@ -9,8 +9,6 @@ public abstract class Boat {
     private int health;
     private int strength;
     private int vision;
-    private static int idCounter = 0;
-    private final String id;
 
     public Boat(int team, Coordinates location, int direction, int health, int strength, int vision) {
         this.team = team;
@@ -19,7 +17,6 @@ public abstract class Boat {
         this.health = health;
         this.strength = strength;
         this.vision = vision;
-        this.id = "B" + ++idCounter;
     }
 
     public int getTeam() {
@@ -112,15 +109,15 @@ public abstract class Boat {
         Coordinates newLocation  = new Coordinates(x+dx, y+dy);
         if (world.isLocationValid(newLocation)) {
             if (world.isLocationOccupied(newLocation)) {
-                return id + " cannot move to " + location.toString() + " as it is occupied.";
+                return getID() + " cannot move to " + location.toString() + " as it is occupied.";
             } else {
                 world.setOccupant(null, location);
                 location = newLocation;
-                return id + " moves from " + location.toString() + " to " + location.toString() + ".";
+                return getID() + " moves from " + location.toString() + " to " + location.toString() + ".";
             }
         } 
         else {
-            return id + " cannot move off the map.";
+            return getID() + " cannot move off the map.";
         }
     }
 
@@ -137,7 +134,7 @@ public abstract class Boat {
         if(direction == 2) facing = "E";
         if(direction == 3) facing = "SE";
         if(direction == 4) facing = "S";
-        if(direction == 0) facing = "SW";
+        if(direction == 5) facing = "SW";
         if(direction == 6) facing = "W";
         if(direction == 7) facing = "NW";
         return getID() + " turned " + action + ", now facing " + facing;
@@ -147,9 +144,9 @@ public abstract class Boat {
         health -= strength;
         if (health <= 0) {
             health = 0;
-            return id + " has been sunk!";
+            return getID() + " has been sunk!";
         } else {
-            return id + " takes " + strength + " damage.";
+            return getID() + " takes " + strength + " damage.";
         }
     }
 
@@ -198,6 +195,6 @@ public abstract class Boat {
 
     @Override
     public String toString() {
-        return id;
+        return getID();
     }
 }

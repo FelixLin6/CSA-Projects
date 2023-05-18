@@ -1,4 +1,6 @@
+package Battleship;
 import java.util.Scanner;
+
 public class Game {
 	public static void main(String[] args) {
 		World ocean = new World(10,10);
@@ -29,7 +31,7 @@ public class Game {
 	}
 
 	public static void setTeam(Boat[] b, World w, int t) {
-		b[0] = new Submarine(t, getRandomCoordinates(w), getRandomDirection(), (int)(Math.random()*5));
+		b[0] = new Submarine(t, getRandomCoordinates(w), getRandomDirection(), (int)(Math.random()*5)+1);
 		w.setOccupant(b[0], b[0].getLocation());
 		b[1] = new Cruiser(t, getRandomCoordinates(w),getRandomDirection());
  		w.setOccupant(b[1],b[1].getLocation());
@@ -52,7 +54,7 @@ public class Game {
 				System.out.println("1. View map\n2. Take action with " + b[n] + "\n");
 				choices[0] = s.nextInt();
 				if (choices[0] == 1) {
-					System.out.println("1. Direction\n2.Health\n");
+					System.out.println("1.Direction\n2.Health\n");
 					choices[0] = s.nextInt();
 					System.out.println(w.drawTeamMap(b, choices[0] + 1));
 				} else {
@@ -61,6 +63,7 @@ public class Game {
 					if (b[n] instanceof Cruiser || b[n] instanceof Destroyer) {
 						choices[1] = s.nextInt();
 					}
+					
 					System.out.println(b[n].act(choices, w));
 					n++;
 				}

@@ -23,13 +23,14 @@ public class AircraftCarrier extends Boat implements Attacker{
         String res = "";
         if(hasPlanes){
             ArrayList<Boat> targets = findTargets(world);
+            if(targets.size()==0) return "There are no boats in range currently";
             res += "Air raid! ";
             for(Boat target: targets){
                 if(target!=null) res += target.takeHit(getStrength()) + "\n"; successRate *=0.8;
             }
+            if(Math.random() > successRate) hasPlanes = false; res += "The planes have been destroyed.";
         }
         else res = getID() + " has no planes remaining.";
-        if(Math.random() > successRate) hasPlanes = false; res += "The planes have been destroyed.";
         return res;
     }
 

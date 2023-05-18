@@ -4,9 +4,9 @@ import java.util.Random;
 public class Submarine extends ScoutBoat{
     private int numOfTorpedoes;
 
-    public Submarine(int teamID, Coordinates pos, int dir){
+    public Submarine(int teamID, Coordinates pos, int dir, int torpedoes){
         super(teamID, pos, dir, 3, 2);
-        numOfTorpedoes = 0;
+        numOfTorpedoes = torpedoes;
     }
 
     public String getID(){
@@ -35,7 +35,6 @@ public class Submarine extends ScoutBoat{
             else if(choice==3) res += turn(1) + "\n";
             else if(choice==4) res += submerge(world) + "\n";
             else if(choice==5) res += attack(world) + "\n";
-            else res += "Invalid action choice.";
         }
         return res;
     }
