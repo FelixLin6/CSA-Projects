@@ -1,8 +1,6 @@
 package Battleship;
 import java.util.Random;
 
-import javax.tools.JavaFileManager.Location;
-
 public class Submarine extends ScoutBoat{
     private int numOfTorpedoes;
 

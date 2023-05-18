@@ -10,6 +10,24 @@ public class Tester {
 		Boat[] teamTwo = new Boat[5];
 
 		setTeam(teamTwo, ocean, 2);
+
+		/*
+		teamTwo[0] = new Submarine(2, new Coordinates(1, 3), 4, 2);
+		ocean.setOccupant(teamTwo[0], teamTwo[0].getLocation());
+		
+		System.out.println(ocean.drawTeamMap(teamTwo, 2));
+		TimeUnit.SECONDS.sleep(1);
+		for(int i = 0; i < 4; i++) {
+			teamTwo[0].submerge(ocean);
+			System.out.println(ocean.drawTeamMap(teamTwo, 2));
+			TimeUnit.SECONDS.sleep(1);
+		}
+		*/
+		
+		
+		
+		//System.out.println(ocean.drawTeamMap(teamOne, 2));
+		
 		System.out.println("*************");
 		System.out.println("BOATS TURNING");
 		System.out.println("*************");
@@ -35,23 +53,6 @@ public class Tester {
 			}
 			
 		}
-		/*
-		teamTwo[0] = new Submarine(2, new Coordinates(1, 3), 4, 2);
-		ocean.setOccupant(teamTwo[0], teamTwo[0].getLocation());
-		
-		System.out.println(ocean.drawTeamMap(teamTwo, 2));
-		TimeUnit.SECONDS.sleep(1);
-		for(int i = 0; i < 4; i++) {
-			teamTwo[0].submerge(ocean);
-			System.out.println(ocean.drawTeamMap(teamTwo, 2));
-			TimeUnit.SECONDS.sleep(1);
-		}
-		*/
-		
-		
-		
-		//System.out.println(ocean.drawTeamMap(teamOne, 2));
-		
 		
 		System.out.println("*************");
 		System.out.println("TEAMTWO MOVING/ATTACKING");
