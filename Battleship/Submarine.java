@@ -24,8 +24,8 @@ public class Submarine extends ScoutBoat{
             cords = new Coordinates(this.getLocation().getX()+(int)(Math.random()*4-2), this.getLocation().getX()+(int)(Math.random()*4-2));
         }
         String res = getID() + " moves from " + oldCords + " to " + cords + ".";
-        world.setOccupant(this, cords);
-        world.setOccupant(null, oldCords);
+        this.setLocation(cords);
+        world.resetOccupant(null, oldCords);
         return res; 
     }
 

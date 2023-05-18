@@ -72,6 +72,12 @@ public class World {
             return false;
         }
     }
+
+    public void resetOccupant(Boat b, Coordinates c){
+        int x = c.getX();
+        int y = c.getY();
+        map[y][x] = b;
+    }
     
     public Coordinates getAdjacentLocation(Coordinates c, int dir) {
         int x = c.getX();

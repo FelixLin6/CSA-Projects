@@ -112,7 +112,7 @@ public abstract class Boat {
             if (world.isLocationOccupied(newLocation)) {
                 return getID() + " cannot move to " + newLocation.toString() + " as it is occupied.";
             } else {
-                world.setOccupant(null, location);
+                world.resetOccupant(null, oldLocation);
                 location = newLocation;
                 return getID() + " moves from " + oldLocation.toString() + " to " + newLocation.toString() + ".";
             }

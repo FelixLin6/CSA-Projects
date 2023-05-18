@@ -20,7 +20,7 @@ public class Battleship extends Boat implements Attacker{
     public String attack(World world){
         String res = "";
         ArrayList<Boat> targets= findTargets(world);
-        if(targets.size()!=0) return "There are no boats in range currently.";
+        if(targets.size()==0) return "There are no boats in range currently.";
         res += "Fire cannons! ";
         for(Boat target: targets){
             if(target!=null) res+=target.takeHit(getStrength()) + "\n"; res+=target.takeHit(getStrength()) + "\n";
