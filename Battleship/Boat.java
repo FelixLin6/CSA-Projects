@@ -107,13 +107,14 @@ public abstract class Boat {
             dy = -1;
         }
         Coordinates newLocation  = new Coordinates(x+dx, y+dy);
+        Coordinates oldLocation = location;
         if (world.isLocationValid(newLocation)) {
             if (world.isLocationOccupied(newLocation)) {
-                return getID() + " cannot move to " + location.toString() + " as it is occupied.";
+                return getID() + " cannot move to " + newLocation.toString() + " as it is occupied.";
             } else {
                 world.setOccupant(null, location);
                 location = newLocation;
-                return getID() + " moves from " + location.toString() + " to " + location.toString() + ".";
+                return getID() + " moves from " + oldLocation.toString() + " to " + newLocation.toString() + ".";
             }
         } 
         else {

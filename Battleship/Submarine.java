@@ -1,6 +1,8 @@
 package Battleship;
 import java.util.Random;
 
+import javax.tools.JavaFileManager.Location;
+
 public class Submarine extends ScoutBoat{
     private int numOfTorpedoes;
 
@@ -18,12 +20,14 @@ public class Submarine extends ScoutBoat{
     }
 
     public String submerge(World world) {
+        Coordinates oldCords = this.getLocation();
         Coordinates cords = new Coordinates(this.getLocation().getX()+(int)(Math.random()*4-2), this.getLocation().getX()+(int)(Math.random()*4-2));
         while(world.isLocationOccupied(cords)){
             cords = new Coordinates(this.getLocation().getX()+(int)(Math.random()*4-2), this.getLocation().getX()+(int)(Math.random()*4-2));
         }
-        String res = getID() + " moves from " + getLocation() + " to " + cords + ".";
-        this.setLocation(cords);
+        String res = getID() + " moves from " + oldCords + " to " + cords + ".";
+        world.setOccupant(this, cords);
+        world.setOccupant(null, oldCords);
         return res; 
     }
 
